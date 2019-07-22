@@ -4,20 +4,26 @@ import os
 import collections
 import time
 import math
+import sys
+
 class index:
     def __init__(self,path):
         self.collection=path
         self.dictionary={}
+        # probably don't need self.word_count_per_doc=[]
         self.query_terms=''
         self.query_dict=''
         self.doc_ID_list=[] # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
         start = time.time()
         self.buildIndex()
-        end = time.time()
-        print("Index built in ", (end - start), " seconds.")
         self.total_number_of_documents = len(self.doc_ID_list)
         self.calculate_idf()
+        self.calculate_tf()
+        end = time.time()
+        print("Index built in ", (end - start), " seconds.")
+        # probably don't need print(self.word_count_per_doc)
         self.print_dict()
+
         self.ask_for_query()
 
     def buildIndex(self):
@@ -160,21 +166,23 @@ class index:
             # add IDF to list in the first position
             value.insert(0, idf)
 
-    def calculate_tf(self, total_words_in_document, text_id):
+    def calculate_tf(self):
+        # TODO tf is not storing properly
         # for each dictionary term
         for key, value in self.dictionary.items():
             # for each document per term in dictionary
             for item in value:
-                # if text_id is equal to the text_id of the list item
-                if item[0] == text_id:
+                if type(item) is tuple:
+                    item = list(item)
                     # measure the number of times a word appears in a doc
                     number_of_appearances_in_doc = len(item[1])
-                    # divide it by the word count of the entire document
+                    # print(number_of_appearances_in_doc)
                     tf = number_of_appearances_in_doc
                     # calculate w
                     w = (1 + math.log10(tf))
                     # insert into list
                     item.insert(1, w)
+                    # print(item)
 
     def exact_query(self, query_terms, k):
         # #function for exact top K retrieval (method 1)
@@ -320,8 +328,8 @@ class index:
         self.query_dict = this_dict
 
 
-# === Testing === #
+    # === Testing === #
 a=index("collection/")
-print(a.query_terms)
-print(a.query_dict)
+# print(a.query_terms)
+# print(a.query_dict)
 # === End of Testing === #
