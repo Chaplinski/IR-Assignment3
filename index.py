@@ -22,9 +22,10 @@ class index:
         end = time.time()
         print("Index built in ", (end - start), " seconds.")
         # probably don't need print(self.word_count_per_doc)
-        self.print_dict()
+        # self.print_dict()
 
-        self.ask_for_query()
+        # self.ask_for_query()
+        self.exact_query(['guns', 'money'], 4)
 
     def buildIndex(self):
         #Function to read documents from collection, tokenize and build the index with tokens
@@ -167,22 +168,23 @@ class index:
             value.insert(0, idf)
 
     def calculate_tf(self):
-        # TODO tf is not storing properly
         # for each dictionary term
         for key, value in self.dictionary.items():
-            # for each document per term in dictionary
+            i = 1
             for item in value:
                 if type(item) is tuple:
                     item = list(item)
                     # measure the number of times a word appears in a doc
                     number_of_appearances_in_doc = len(item[1])
-                    # print(number_of_appearances_in_doc)
                     tf = number_of_appearances_in_doc
                     # calculate w
                     w = (1 + math.log10(tf))
                     # insert into list
                     item.insert(1, w)
-                    # print(item)
+                    item = tuple(item)
+                    value[i] = item
+                    i += 1
+
 
     def exact_query(self, query_terms, k):
         # #function for exact top K retrieval (method 1)
@@ -326,6 +328,90 @@ class index:
             this_dict[key] = [w, idf]
 
         self.query_dict = this_dict
+
+    def exact_query(self, query_terms, k):
+        # #function for exact top K retrieval (method 1)
+        # #Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
+        #     print('query: ', query_terms)
+        #     print('top k: ', k)
+        #     print('index: ', self.index)
+
+        # build the dictionaries containing query terms and index terms and their ids and tf-idf
+        query_tf_idf_dict = {}
+        index_tf_idf_dict = {}
+        # for each word in the query
+        for word, list in query_terms.items():
+            # if that word is not a stop word
+            if word not in self.stop_words:
+                # get tf-idf of this query term
+                query_term_tf_idf = list[0] * list[1]
+                query_tf_idf_dict[word] = query_term_tf_idf
+                # print('list:', list, 'tf-idf:', query_term_tf_idf)
+                # if the word appears in self.index
+                if word in self.index:
+                    # get idf from the dictionary
+                    dictionary_idf = self.index[word][0]
+                    # print(word, 'is in the index and its idf value is:', dictionary_idf)
+                    for doc_id_list in self.index[word]:
+                        # skip the first list item since it is the idf
+                        if doc_id_list != self.index[word][0]:
+                            # get doc id
+                            doc_id = doc_id_list[0]
+                            # get word tf
+                            word_tf = doc_id_list[1]
+                            # get tf-idf of word appearing in this document
+                            doc_word_tf_idf = word_tf * dictionary_idf
+                            if doc_id in index_tf_idf_dict:
+                                # if doc id already exists in index_tf_idf_dict then add to the dictionary that
+                                # is its value
+                                index_tf_idf_dict[doc_id][word] = doc_word_tf_idf
+                                # print('doc id is:', doc_id, 'and tf-idf is:', doc_word_tf_idf)
+                            else:
+                                # if doc id does not exist in index_tf_idf_dict then add doc id and dictionary
+                                # as value. Also add current word and its tf-idf
+                                index_tf_idf_dict[doc_id] = {}
+                                index_tf_idf_dict[doc_id][word] = doc_word_tf_idf
+                                # print('doc id is:', doc_id, 'and tf-idf is:', doc_word_tf_idf)
+                                # sys.exit()
+
+        # print('Query tf-idf:', query_tf_idf_dict)
+        # print('Index tf-idf', index_tf_idf_dict)
+
+        # for each text id held in index_tf_idf_dict
+        for index_key, index_dictionary in index_tf_idf_dict.items():
+            numerator = 0
+            denominator_index = 0
+            denominator_query = 0
+            # print('index dictionary: ', index_dictionary)
+            # loop through query terms
+            for query_key, query_value in query_tf_idf_dict.items():
+                # if the query key exists in the index_dictionary
+                if query_key in index_dictionary:
+                    index_tf_idf = index_dictionary[query_key]
+                else:
+                    index_tf_idf = 0
+                query_tf_idf = query_value
+                add_to_numerator = index_tf_idf * query_tf_idf
+                numerator += add_to_numerator
+
+                denominator_index += index_tf_idf * index_tf_idf
+                denominator_query += query_tf_idf * query_tf_idf
+                # print('index tf-idf:', index_tf_idf)
+                # print('query tf-idf: ', query_tf_idf)
+                # print('Number added:', add_to_numerator)
+            # TODO Why is vector so high for document 1?
+            # sys.exit()
+
+            # for word, tf_idf in query_tf_idf_dict.items():
+            denominator_index_root = math.sqrt(denominator_index)
+            denominator_query_root = math.sqrt(denominator_query)
+            denominator = denominator_index_root * denominator_query_root
+            vector = numerator / denominator
+            print('Document', index_key, 'Numerator:', numerator)
+            print('Document', index_key, 'Index denominator:', denominator_index_root)
+            print('Document', index_key, 'Query denominator:', denominator_query_root)
+            print('Document', index_key, 'Denominator:', denominator)
+            print('Document', index_key, 'Vector:', vector)
 
 
     # === Testing === #
