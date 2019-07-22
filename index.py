@@ -15,6 +15,10 @@ class index:
         self.buildIndex()
         end = time.time()
         print("Index built in ", (end - start), " seconds.")
+        self.total_number_of_documents = len(self.doc_ID_list)
+        self.calculate_idf()
+        self.print_dict()
+        self.ask_for_query()
 
     def buildIndex(self):
         #Function to read documents from collection, tokenize and build the index with tokens
@@ -144,6 +148,33 @@ class index:
     # function to print the documents and their document id
         for index, item in enumerate(self.doc_ID_list):
             print('Doc ID: ', index, ' ==> ',item)
+
+    def calculate_idf(self):
+
+        # for each term in dictionary calculate and add the IDF
+        for key, value in self.dictionary.items():
+            # calculate IDF
+            idf = math.log10(self.total_number_of_documents/len(value))
+            # print(this_dict)
+            # sys.exit()
+            # add IDF to list in the first position
+            value.insert(0, idf)
+
+    def calculate_tf(self, total_words_in_document, text_id):
+        # for each dictionary term
+        for key, value in self.dictionary.items():
+            # for each document per term in dictionary
+            for item in value:
+                # if text_id is equal to the text_id of the list item
+                if item[0] == text_id:
+                    # measure the number of times a word appears in a doc
+                    number_of_appearances_in_doc = len(item[1])
+                    # divide it by the word count of the entire document
+                    tf = number_of_appearances_in_doc
+                    # calculate w
+                    w = (1 + math.log10(tf))
+                    # insert into list
+                    item.insert(1, w)
 
     def exact_query(self, query_terms, k):
         # #function for exact top K retrieval (method 1)
@@ -291,7 +322,6 @@ class index:
 
 # === Testing === #
 a=index("collection/")
-a.ask_for_query()
 print(a.query_terms)
 print(a.query_dict)
 # === End of Testing === #
