@@ -14,6 +14,8 @@ class index:
         self.query_terms=''
         self.query_dict=''
         self.stop_words=[]
+        self.query_tf_idf_dict={}
+        self.index_tf_idf_dict={}
         self.top_k = 10
         self.doc_ID_list=[] # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
         start = time.time()
@@ -118,59 +120,17 @@ class index:
         # #function for exact top K retrieval (method 1)
         # #Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
 
-        # build the dictionaries containing query terms and index terms and their ids and tf-idf
-        query_tf_idf_dict = {}
-        index_tf_idf_dict = {}
-        # for each word in the query
-        for word, list in self.query_dict.items():
-            # if that word is not a stop word
-            if word not in self.stop_words:
-                # get tf-idf of this query term
-                # print(word)
-                # print(list)
-
-                query_term_tf_idf = list[0] * list[1]
-                query_tf_idf_dict[word] = query_term_tf_idf
-                # print('list:', list, 'tf-idf:', query_term_tf_idf)
-                # if the word appears in self.index
-                if word in self.dictionary:
-                    # get idf from the dictionary
-                    dictionary_idf = self.dictionary[word][0]
-                    # print(word, 'is in the index and its idf value is:', dictionary_idf)
-                    for doc_id_list in self.dictionary[word]:
-                        # skip the first list item since it is the idf
-                        if doc_id_list != self.dictionary[word][0]:
-                            # get doc id
-                            doc_id = doc_id_list[0]
-                            # get word tf
-                            word_tf = doc_id_list[1]
-                            # get tf-idf of word appearing in this document
-                            doc_word_tf_idf = word_tf * dictionary_idf
-                            if doc_id in index_tf_idf_dict:
-                                # if doc id already exists in index_tf_idf_dict then add to the dictionary that
-                                # is its value
-                                index_tf_idf_dict[doc_id][word] = doc_word_tf_idf
-                                # print('doc id is:', doc_id, 'and tf-idf is:', doc_word_tf_idf)
-                            else:
-                                # if doc id does not exist in index_tf_idf_dict then add doc id and dictionary
-                                # as value. Also add current word and its tf-idf
-                                index_tf_idf_dict[doc_id] = {}
-                                index_tf_idf_dict[doc_id][word] = doc_word_tf_idf
-                                # print('doc id is:', doc_id, 'and tf-idf is:', doc_word_tf_idf)
-                                # sys.exit()
-
-        print('Query tf-idf:', query_tf_idf_dict)
-        print('Index tf-idf', index_tf_idf_dict)
+        self.get_tf_idf_dicts()
 
         top_k_dictionary = {}
         # for each text id held in index_tf_idf_dict
-        for index_key, index_dictionary in index_tf_idf_dict.items():
+        for index_key, index_dictionary in self.index_tf_idf_dict.items():
             numerator = 0
             denominator_index = 0
             denominator_query = 0
             # print('index dictionary: ', index_dictionary)
             # loop through query terms
-            for query_key, query_value in query_tf_idf_dict.items():
+            for query_key, query_value in self.query_tf_idf_dict.items():
                 # print(query_tf_idf_dict)
                 # sys.exit()
                 # if the query key exists in the index_dictionary
@@ -213,6 +173,50 @@ class index:
                     break
             if i == 0:
                 break
+
+    def get_tf_idf_dicts(self):
+        # build the dictionaries containing query terms and index terms and their ids and tf-idf
+
+        # for each word in the query
+        for word, list in self.query_dict.items():
+            # if that word is not a stop word
+            if word not in self.stop_words:
+                # get tf-idf of this query term
+                # print(word)
+                # print(list)
+
+                query_term_tf_idf = list[0] * list[1]
+                self.query_tf_idf_dict[word] = query_term_tf_idf
+                # print('list:', list, 'tf-idf:', query_term_tf_idf)
+                # if the word appears in self.index
+                if word in self.dictionary:
+                    # get idf from the dictionary
+                    dictionary_idf = self.dictionary[word][0]
+                    # print(word, 'is in the index and its idf value is:', dictionary_idf)
+                    for doc_id_list in self.dictionary[word]:
+                        # skip the first list item since it is the idf
+                        if doc_id_list != self.dictionary[word][0]:
+                            # get doc id
+                            doc_id = doc_id_list[0]
+                            # get word tf
+                            word_tf = doc_id_list[1]
+                            # get tf-idf of word appearing in this document
+                            doc_word_tf_idf = word_tf * dictionary_idf
+                            if doc_id in self.index_tf_idf_dict:
+                                # if doc id already exists in index_tf_idf_dict then add to the dictionary that
+                                # is its value
+                                self.index_tf_idf_dict[doc_id][word] = doc_word_tf_idf
+                                # print('doc id is:', doc_id, 'and tf-idf is:', doc_word_tf_idf)
+                            else:
+                                # if doc id does not exist in index_tf_idf_dict then add doc id and dictionary
+                                # as value. Also add current word and its tf-idf
+                                self.index_tf_idf_dict[doc_id] = {}
+                                self.index_tf_idf_dict[doc_id][word] = doc_word_tf_idf
+                                # print('doc id is:', doc_id, 'and tf-idf is:', doc_word_tf_idf)
+                                # sys.exit()
+
+        print('Query tf-idf:', self.query_tf_idf_dict)
+        print('Index tf-idf', self.index_tf_idf_dict)
 
     def convert_string_to_list(self, contents):
         # remove all punctuation and numerals, all text is lowercase
