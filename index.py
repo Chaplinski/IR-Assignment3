@@ -5,6 +5,7 @@ import collections
 import time
 import math
 import sys
+import json
 
 class index:
     def __init__(self,path):
@@ -28,14 +29,14 @@ class index:
         end = time.time()
         print("Index built in ", (end - start), " seconds.")
         # probably don't need print(self.word_count_per_doc)
-        # self.print_dict()
-        self.ask_for_query()
+        self.print_dict()
+        #self.ask_for_query()
         # print('exact query:')
         # self.exact_query()
         # self.ask_for_query()
         # print('inexact query:')
         # self.inexact_query_index_elimination()
-        self.inexact_query_champion()
+        # self.inexact_query_champion()
 
     def buildIndex(self):
         #Function to read documents from collection, tokenize and build the index with tokens
@@ -139,6 +140,7 @@ class index:
             sorted_list = sorted(temp_list, key=lambda x: x[1], reverse=True)
             # print(sorted_list)
             temp_list = []
+            temp_list.append(value[0])
             for list in sorted_list:
                 temp_list.append(list)
                 r -= 1
@@ -147,6 +149,7 @@ class index:
             self.champion_list[key] = temp_list
         # print('hello')
         # print(self.champion_list)
+
         self.dictionary.clear()
         self.dictionary = self.champion_list
         self.exact_query()
@@ -163,7 +166,7 @@ class index:
             # since these docs are more rare all of them should appear
             r = num_of_docs_with_term
 
-        return 3
+        return r
 
 
     def exact_query(self):
@@ -286,6 +289,8 @@ class index:
                             # get word tf
                             word_tf = doc_id_list[1]
                             # get tf-idf of word appearing in this document
+                            # print('Doc word tf', word_tf)
+                            # print('Dict idf:', dictionary_idf)
                             doc_word_tf_idf = word_tf * dictionary_idf
                             if doc_id in self.index_tf_idf_dict:
                                 # if doc id already exists in index_tf_idf_dict then add to the dictionary that
