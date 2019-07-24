@@ -16,6 +16,7 @@ class index:
         self.stop_words=[]
         self.query_tf_idf_dict={}
         self.index_tf_idf_dict={}
+        self.champion_list = {}
         self.top_k = 10
         self.doc_ID_list=[] # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
         start = time.time()
@@ -27,18 +28,14 @@ class index:
         end = time.time()
         print("Index built in ", (end - start), " seconds.")
         # probably don't need print(self.word_count_per_doc)
-        # self.print_dict()
-
-        self.ask_for_query()
-
-        print('exact query:')
-        self.exact_query()
-
-        self.ask_for_query()
-
-        print('inexact query:')
-        self.inexact_query_index_elimination()
-
+        self.print_dict()
+        # self.ask_for_query()
+        # print('exact query:')
+        # self.exact_query()
+        # self.ask_for_query()
+        # print('inexact query:')
+        # self.inexact_query_index_elimination()
+        #self.inexact_query_champion()
 
     def buildIndex(self):
         #Function to read documents from collection, tokenize and build the index with tokens
@@ -123,6 +120,31 @@ class index:
                     item = tuple(item)
                     value[i] = item
                     i += 1
+
+    def inexact_query_champion(self):
+        # Function for exact top K retrieval using champion list (method 2)
+        # Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
+        for key, value in self.dictionary.items():
+            num_of_docs_with_term = len(value) - 1
+            r = self.r_formula(num_of_docs_with_term)
+
+            if r == 10:
+                print(key)
+                print('Number of texts', key, 'appears in:', num_of_docs_with_term)
+                for list in value:
+                    if list != value[0]:
+                        print(list)
+
+    def r_formula(self, num_of_docs_with_term):
+        if num_of_docs_with_term >= 10:
+            r = 10
+        elif num_of_docs_with_term > 15:
+            r = 5
+        else:
+            r = num_of_docs_with_term
+
+        return r
+
 
     def exact_query(self):
         # #function for exact top K retrieval (method 1)
