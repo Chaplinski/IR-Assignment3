@@ -192,8 +192,7 @@ class index:
     def inexact_query_index_elimination(self):
         # function for exact top K retrieval using index elimination (method 3)
         # Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
-        self.query_tf_idf_dict.clear()
-        self.index_tf_idf_dict.clear()
+
         temp_dict = {}
         for key, value in self.query_dict.items():
             temp_dict[key] = value[1]
@@ -286,6 +285,8 @@ class index:
 
     # get query and store terms as a list
     def ask_for_query(self):
+        self.query_tf_idf_dict.clear()
+        self.index_tf_idf_dict.clear()
         query = input("Enter your query: ")
         self.query_terms = self.convert_string_to_list(query)
         self.create_query_dict()
