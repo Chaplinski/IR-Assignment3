@@ -28,14 +28,14 @@ class index:
         end = time.time()
         print("Index built in ", (end - start), " seconds.")
         # probably don't need print(self.word_count_per_doc)
-        self.print_dict()
-        # self.ask_for_query()
+        # self.print_dict()
+        self.ask_for_query()
         # print('exact query:')
         # self.exact_query()
         # self.ask_for_query()
         # print('inexact query:')
         # self.inexact_query_index_elimination()
-        #self.inexact_query_champion()
+        self.inexact_query_champion()
 
     def buildIndex(self):
         #Function to read documents from collection, tokenize and build the index with tokens
@@ -126,24 +126,44 @@ class index:
         # Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
         for key, value in self.dictionary.items():
             num_of_docs_with_term = len(value) - 1
+            # set r
             r = self.r_formula(num_of_docs_with_term)
+            temp_list = []
 
-            if r == 10:
-                print(key)
-                print('Number of texts', key, 'appears in:', num_of_docs_with_term)
-                for list in value:
-                    if list != value[0]:
-                        print(list)
+            # print(key)
+            # print('Number of texts', key, 'appears in:', num_of_docs_with_term)
+            for list in value:
+                if list != value[0]:
+                    temp_list.append(list)
+            # sort in descending order
+            sorted_list = sorted(temp_list, key=lambda x: x[1], reverse=True)
+            # print(sorted_list)
+            temp_list = []
+            for list in sorted_list:
+                temp_list.append(list)
+                r -= 1
+                if r == 0:
+                    break
+            self.champion_list[key] = temp_list
+        # print('hello')
+        # print(self.champion_list)
+        self.dictionary.clear()
+        self.dictionary = self.champion_list
+        self.exact_query()
+
 
     def r_formula(self, num_of_docs_with_term):
         if num_of_docs_with_term >= 10:
+            # the more docs a word appears in the less valuable it is
             r = 10
         elif num_of_docs_with_term > 15:
+            # the more docs a word appears in the less valuable it is
             r = 5
         else:
+            # since these docs are more rare all of them should appear
             r = num_of_docs_with_term
 
-        return r
+        return 3
 
 
     def exact_query(self):
