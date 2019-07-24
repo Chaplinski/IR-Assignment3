@@ -12,7 +12,7 @@ class index:
         self.dictionary={}
         # probably don't need self.word_count_per_doc=[]
         self.query_terms=''
-        self.query_dict=''
+        self.query_dict={}
         self.stop_words=[]
         self.query_tf_idf_dict={}
         self.index_tf_idf_dict={}
@@ -30,7 +30,15 @@ class index:
         # self.print_dict()
 
         self.ask_for_query()
+
+        print('exact query:')
         self.exact_query()
+
+        self.ask_for_query()
+
+        print('inexact query:')
+        self.inexact_query_index_elimination()
+
 
     def buildIndex(self):
         #Function to read documents from collection, tokenize and build the index with tokens
@@ -125,28 +133,35 @@ class index:
         top_k_dictionary = {}
         # for each text id held in index_tf_idf_dict
         for index_key, index_dictionary in self.index_tf_idf_dict.items():
+            # print(index_key)
+            # print(index_dictionary)
+            # sys.exit()
             numerator = 0
             denominator_index = 0
             denominator_query = 0
             # print('index dictionary: ', index_dictionary)
             # loop through query terms
             for query_key, query_value in self.query_tf_idf_dict.items():
-                # print(query_tf_idf_dict)
-                # sys.exit()
-                # if the query key exists in the index_dictionary
-                if query_key in index_dictionary:
-                    index_tf_idf = index_dictionary[query_key]
-                else:
-                    index_tf_idf = 0
-                query_tf_idf = query_value
-                add_to_numerator = index_tf_idf * query_tf_idf
-                numerator += add_to_numerator
+                # print(self.query_tf_idf_dict)
+                # print('Query value: ', query_value)
+                # for key, value in query_value.items():
+                if query_key in self.query_terms:
+                    # print(query_tf_idf_dict)
+                    # sys.exit()
+                    # if the query key exists in the index_dictionary
+                    if query_key in index_dictionary:
+                        index_tf_idf = index_dictionary[query_key]
+                    else:
+                        index_tf_idf = 0
+                    query_tf_idf = query_value
+                    add_to_numerator = index_tf_idf * query_tf_idf
+                    numerator += add_to_numerator
 
-                denominator_index += index_tf_idf * index_tf_idf
-                denominator_query += query_tf_idf * query_tf_idf
-                # print('index tf-idf:', index_tf_idf)
-                # print('query tf-idf: ', query_tf_idf)
-                # print('Number added:', add_to_numerator)
+                    denominator_index += index_tf_idf * index_tf_idf
+                    denominator_query += query_tf_idf * query_tf_idf
+                    # print('index tf-idf:', index_tf_idf)
+                    # print('query tf-idf: ', query_tf_idf)
+                    # print('Number added:', add_to_numerator)
             # TODO Why is vector so high for document 1?
             # sys.exit()
 
@@ -173,6 +188,36 @@ class index:
                     break
             if i == 0:
                 break
+
+    def inexact_query_index_elimination(self):
+        # function for exact top K retrieval using index elimination (method 3)
+        # Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
+        self.query_tf_idf_dict.clear()
+        self.index_tf_idf_dict.clear()
+        temp_dict = {}
+        for key, value in self.query_dict.items():
+            temp_dict[key] = value[1]
+
+        temp_dict_sorted = sorted(temp_dict, key=temp_dict.get, reverse=True)
+        # get dictionary count
+        list_length = len(temp_dict_sorted)
+        new_list_size = math.ceil(list_length/2)
+        temp_dict_2 = {}
+        temp_query_list = []
+        for word in temp_dict_sorted:
+            for key, value in self.query_dict.items():
+                if word == key:
+                    temp_dict_2[word] = value
+                    temp_query_list.append(word)
+            new_list_size -= 1
+            if new_list_size == 0:
+                break
+        self.query_dict.clear()
+        self.query_dict = temp_dict_2
+        self.query_terms = temp_query_list
+        print('query terms: ', self.query_terms)
+        # now that query dict has been halved simply call exact_query to function on the halved query
+        self.exact_query()
 
     def get_tf_idf_dicts(self):
         # build the dictionaries containing query terms and index terms and their ids and tf-idf
@@ -247,6 +292,7 @@ class index:
         # create dictionary to keep track of word occurrences in query
 
     def create_query_dict(self):
+        print('query dict:', self.query_dict)
         this_dict = {}
         # for each word in query
         for item in self.query_terms:
@@ -276,6 +322,7 @@ class index:
             this_dict[key] = [w, idf]
 
         self.query_dict = this_dict
+        print('original query dict:', self.query_dict)
 
     def get_stop_words(self):
         f = open('stop-list/stop-list.txt', "r")
