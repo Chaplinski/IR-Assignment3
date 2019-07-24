@@ -192,7 +192,6 @@ class index:
     def inexact_query_index_elimination(self):
         # function for exact top K retrieval using index elimination (method 3)
         # Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
-
         temp_dict = {}
         for key, value in self.query_dict.items():
             temp_dict[key] = value[1]
