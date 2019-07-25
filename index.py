@@ -19,6 +19,7 @@ class index:
         self.index_tf_idf_dict={}
         self.champion_list = {}
         self.top_k = 10
+        self.doc_lengths=[]
         self.doc_ID_list=[] # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
         start = time.time()
         self.get_stop_words()
@@ -28,9 +29,10 @@ class index:
         self.calculate_tf()
         end = time.time()
         print("Index built in ", (end - start), " seconds.")
+        self.calculate_doc_lengths()
         # probably don't need print(self.word_count_per_doc)
-        self.print_dict()
-        #self.ask_for_query()
+        # self.print_dict()
+        # self.ask_for_query()
         # print('exact query:')
         # self.exact_query()
         # self.ask_for_query()
@@ -121,6 +123,33 @@ class index:
                     item = tuple(item)
                     value[i] = item
                     i += 1
+
+    def calculate_doc_lengths(self):
+        # for every word in the dictionary
+
+        doc_id = 0
+        # for each document
+        for document in self.doc_ID_list:
+            doc_length = 0
+            for word, list in self.dictionary.items():
+
+                # for every value in the list associated with every word
+                for value in list:
+                    # if the value is not the idf and the word is contained in the current document
+                    if value != list[0] and value[0] == doc_id:
+                        print('word:', word)
+                        print('idf:', list[0])
+                        print('value:', value)
+                        tf_idf = value[1] * list[0]
+                        doc_length += tf_idf * tf_idf
+                        #print('tf idf squared:', doc_length)
+            doc_length = math.sqrt(doc_length)
+            print('doc', doc_id, 'length:', doc_length)
+            self.doc_lengths.append(doc_length)
+            doc_id += 1
+        print(self.doc_lengths)
+        sys.exit()
+
 
     def inexact_query_champion(self):
         # Function for exact top K retrieval using champion list (method 2)
