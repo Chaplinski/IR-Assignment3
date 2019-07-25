@@ -244,13 +244,15 @@ class index:
         top_k_dictionary = {}
         # for each text id held in index_tf_idf_dict
         for index_key, index_dictionary in self.index_tf_idf_dict.items():
-            print(index_key)
-            print(index_dictionary)
-
             numerator = 0
             denominator_index = self.doc_lengths[index_key]
-            denominator_query = 0
-            print(denominator_index)
+
+            for word, tf_idf in index_dictionary.items():
+                query_word_tf_idf = self.query_tf_idf_dict[word]
+                print(index_key)
+                print(index_dictionary)
+
+                print(denominator_index)
             # print('index dictionary: ', index_dictionary)
             # loop through query terms
         sys.exit()
