@@ -237,69 +237,37 @@ class index:
 
         self.get_tf_idf_dicts()
 
-        # for query_key in self.query_tf_idf_dict:
-        #     print('word:', query_key)
-        #     print('Query value: ', self.query_tf_idf_dict[query_key])
+        # get query denominator
+        denominator_query = 0
+        for query_key in self.query_tf_idf_dict:
+            denominator_query += self.query_tf_idf_dict[query_key] * self.query_tf_idf_dict[query_key]
+        denominator_query = math.sqrt(denominator_query)
 
         top_k_dictionary = {}
         # for each text id held in index_tf_idf_dict
         for index_key, index_dictionary in self.index_tf_idf_dict.items():
             numerator = 0
-            denominator_index = self.doc_lengths[index_key]
-
-            for word, tf_idf in index_dictionary.items():
+            for word in index_dictionary:
+                index_word_tf_idf = index_dictionary[word]
                 query_word_tf_idf = self.query_tf_idf_dict[word]
-                print(index_key)
-                print(index_dictionary)
+                numerator += query_word_tf_idf * index_word_tf_idf
 
-                print(denominator_index)
-            # print('index dictionary: ', index_dictionary)
-            # loop through query terms
-        sys.exit()
-        #     # for key, value in query_value.items():
-        #     if query_key in self.query_terms:
-        #         # print(query_tf_idf_dict)
-        #         # sys.exit()
-        #         # if the query key exists in the index_dictionary
-        #         if query_key in index_dictionary:
-        #             index_tf_idf = index_dictionary[query_key]
-        #         else:
-        #             index_tf_idf = 0
-        #         query_tf_idf = self.query_tf_idf_dict[query_key]
-        #         add_to_numerator = index_tf_idf * query_tf_idf
-        #         numerator += add_to_numerator
-        #
-        #         denominator_index += index_tf_idf * index_tf_idf
-        #         denominator_query += query_tf_idf * query_tf_idf
-        #         # print('index tf-idf:', index_tf_idf)
-        #         # print('query tf-idf: ', query_tf_idf)
-        #         # print('Number added:', add_to_numerator)
-        #     # TODO Why is vector so high for document 1?
-        #     # sys.exit()
-        #
-        #     # for word, tf_idf in query_tf_idf_dict.items():
-        #     denominator_index_root = math.sqrt(denominator_index)
-        #     denominator_query_root = math.sqrt(denominator_query)
-        #     denominator = denominator_index_root * denominator_query_root
-        #     vector = numerator / denominator
-        #     # print('Document', index_key, 'Numerator:', numerator)
-        #     # print('Document', index_key, 'Index denominator:', denominator_index_root)
-        #     # print('Document', index_key, 'Query denominator:', denominator_query_root)
-        #     # print('Document', index_key, 'Denominator:', denominator)
-        #     # print('Document', index_key, 'Vector:', vector)
-        #     top_k_dictionary[index_key] = vector
-        #
-        # top_k_dictionary_sorted_keys = sorted(top_k_dictionary, key=top_k_dictionary.get, reverse=True)
-        # i = self.top_k
-        # print('Top K results:')
-        # for r in top_k_dictionary_sorted_keys:
-        #     for index, item in enumerate(self.doc_ID_list):
-        #         if r == index:
-        #             print(item)
-        #             i -= 1
-        #             break
-        #     if i == 0:
-        #         break
+            denominator_index = self.doc_lengths[index_key]
+            denominator_final = denominator_query * denominator_index
+            cosine_sim = numerator/denominator_final
+            top_k_dictionary[index_key] = cosine_sim
+
+        top_k_dictionary_sorted_keys = sorted(top_k_dictionary, key=top_k_dictionary.get, reverse=True)
+        i = self.top_k
+        print('Top K results:')
+        for r in top_k_dictionary_sorted_keys:
+            for index, item in enumerate(self.doc_ID_list):
+                if r == index:
+                    print(item)
+                    i -= 1
+                    break
+            if i == 0:
+                break
 
     def inexact_query_index_elimination(self):
         # function for exact top K retrieval using index elimination (method 3)
