@@ -6,6 +6,7 @@ import time
 import math
 import sys
 import json
+import random
 
 class index:
     def __init__(self,path):
@@ -20,6 +21,7 @@ class index:
         self.champion_list = {}
         self.top_k = 10
         self.doc_lengths=[]
+        self.cluster_dict={}
         self.doc_ID_list=[] # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
         start = time.time()
         self.get_stop_words()
@@ -33,13 +35,14 @@ class index:
         # self.print_dict()
         # probably don't need print(self.word_count_per_doc)
         # self.print_dict()
-        self.ask_for_query()
+        # self.ask_for_query()
         # print('exact query:')
-        self.exact_query()
+        # self.exact_query()
         # self.ask_for_query()
         # print('inexact query:')
         # self.inexact_query_index_elimination()
         # self.inexact_query_champion()
+        self.inexact_query_cluster_pruning()
 
     def buildIndex(self):
         #Function to read documents from collection, tokenize and build the index with tokens
@@ -51,7 +54,6 @@ class index:
             self.doc_ID_list.append(filename)
             #read a document
             lines = open(self.collection + filename).read()
-            #tokens = re.split(r'[^A-Za-z]', lines.lower())
             tokens = re.split('\W+',lines.lower());
             self.insert_terms(tokens, docID)
         self.dictionary = collections.OrderedDict(sorted(self.dictionary.items()))
@@ -66,12 +68,10 @@ class index:
                 if tok == '':
                     pass
                 elif tok in self.dictionary: # faster
-                #elif tok in self.dictionary.keys():
                     flag=False
                     for index, item in enumerate(self.dictionary[tok]):
                         if item[0] == docID: #add new pos to existing docID entry
                             item[1].append(pos)
-                            #self.dictionary[tok][index]=item
                             flag=True
                             break
                     if flag == False: #first pos for docID for this tok
@@ -137,13 +137,9 @@ class index:
                 doc_length = 0
                 # if the value is not the idf
                 if value != list[0]:
-                    # print('word:', word)
-                    # print('idf:', list[0])
-                    # print('value:', value)
                     tf_idf = value[1] * list[0]
                     # get tf-idf squared
                     doc_length += tf_idf * tf_idf
-                    # print('tf idf squared:', doc_length)
                     # and add it to the current doc length
                     self.doc_lengths[value[0]] += doc_length
 
@@ -183,6 +179,95 @@ class index:
         self.create_query_dict()
         # create dictionary to keep track of word occurrences in query
 
+    def inexact_query_cluster_pruning(self):
+        # TODO do this function now
+        lead_follow_list = self.get_leaders_and_followers()
+        leaders = lead_follow_list[0]
+        followers = lead_follow_list[1]
+        print(leaders)
+        print(followers)
+        cluster_dict = {}
+        for leader in leaders:
+            cluster_dict[leader] = []
+
+        numerator = 0
+        # calculate the leader that each follower clusters with
+        for follower in followers:
+            if follower != 422:
+                current_best_cosine = 0
+                for leader in leaders:
+                    if leader != 422:
+                    # for every word in the dictionary
+                        for key, value in self.dictionary.items():
+                            leader_tf_idf = 0
+                            follower_tf_idf = 0
+                            # print(key, value)
+                            doc_idf = value[0]
+                            # for every document that contains this word
+                            for doc in value:
+                                # skip the idf at beginning of list
+                                if doc != value[0]:
+                                    # if this document is the leader document
+                                    if doc[0] == leader:
+                                        leader_tf_idf = doc[1] * doc_idf
+                                        # print(doc)
+                                        # print(doc[0])
+                                        # print(doc[1])
+                                        # print('leader tfidf:', leader_tf_idf)
+                                        # sys.exit()
+                                    elif doc[0] == follower:
+                                        follower_tf_idf = doc[1] * doc_idf
+                                        # print(doc)
+                                        # print(doc[0])
+                                        # print(doc[1])
+                                        # print('follower tfidf:', follower_tf_idf)
+                                        # sys.exit()
+                                    # if tf-idf of leader and follower have already been found then move to next word
+                                    if leader_tf_idf > 0 and follower_tf_idf > 0:
+                                        break
+                        # if there is a tfidf value for this word for the leader and follower add their product to numerator
+                            if leader_tf_idf > 0 and follower_tf_idf > 0:
+                                numerator += leader_tf_idf * follower_tf_idf
+                        doc_similarity = numerator / (self.doc_lengths[leader] * self.doc_lengths[follower])
+                        # print('leader', leader, 'follower', follower, 'similarity:', doc_similarity)
+
+                        numerator = 0
+
+                    if doc_similarity > current_best_cosine:
+                        current_best_cosine = doc_similarity
+                        current_best_leader = leader
+                # print(current_best_cosine)
+                # print(current_best_leader)
+                cluster_dict[current_best_leader].append(follower)
+                # print(cluster_dict)
+                # sys.exit()
+        self.cluster_dict = cluster_dict
+
+    def get_leaders_and_followers(self):
+        # function for exact top K retrieval using cluster pruning (method 4)
+        # Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
+        i = 0
+        doc_id_list = []
+        # create int id list from string id list
+        for doc in self.doc_ID_list:
+            doc_id_list.append(i)
+            i += 1
+        # get number of docs to be leaders
+        N = len(doc_id_list)
+        N_root = math.floor(math.sqrt(N))
+        leader_list = []
+        follower_list = doc_id_list
+        # get leader list and remove leaders from follower list
+        for doc in doc_id_list:
+            new_leader = random.choice(follower_list)
+            leader_list.append(new_leader)
+            follower_list.remove(new_leader)
+            N_root -= 1
+            if N_root == 0:
+                break
+
+        return [leader_list, follower_list]
+
 
     def inexact_query_champion(self):
         # Function for exact top K retrieval using champion list (method 2)
@@ -193,14 +278,11 @@ class index:
             r = self.r_formula(num_of_docs_with_term)
             temp_list = []
 
-            # print(key)
-            # print('Number of texts', key, 'appears in:', num_of_docs_with_term)
             for list in value:
                 if list != value[0]:
                     temp_list.append(list)
             # sort in descending order
             sorted_list = sorted(temp_list, key=lambda x: x[1], reverse=True)
-            # print(sorted_list)
             temp_list = []
             temp_list.append(value[0])
             for list in sorted_list:
@@ -209,13 +291,9 @@ class index:
                 if r == 0:
                     break
             self.champion_list[key] = temp_list
-        # print('hello')
-        # print(self.champion_list)
-
         self.dictionary.clear()
         self.dictionary = self.champion_list
         self.exact_query()
-
 
     def r_formula(self, num_of_docs_with_term):
         if num_of_docs_with_term >= 10:
@@ -229,7 +307,6 @@ class index:
             r = num_of_docs_with_term
 
         return r
-
 
     def exact_query(self):
         # #function for exact top K retrieval (method 1)
