@@ -21,7 +21,7 @@ class index:
         self.champion_list = {}
         self.top_k = 10
         self.doc_lengths=[]
-        self.cluster_dict={}
+        self.cluster_dict={192: [42, 48, 91, 100, 104, 148, 181, 206, 230, 231, 237, 261, 283, 350, 386, 403], 352: [1, 6, 14, 16, 50, 51, 110, 219, 274, 288, 298, 384, 410, 415], 388: [5, 41, 57, 74, 75, 118, 128, 131, 195, 330, 371, 382, 399, 409, 413], 134: [8, 20, 23, 37, 45, 46, 52, 81, 88, 113, 132, 147, 153, 156, 198, 203, 227, 241, 243, 246, 253, 271, 294, 305, 314, 340, 363, 366, 377, 401, 412, 417, 419], 257: [67, 127, 347, 414, 416], 393: [3, 13, 19, 27, 61, 63, 64, 68, 73, 94, 129, 133, 145, 155, 157, 159, 161, 175, 177, 190, 199, 202, 216, 217, 223, 239, 242, 252, 254, 260, 268, 270, 285, 292, 293, 303, 306, 309, 319, 322, 323, 326, 329, 342, 344, 351, 365, 372, 376, 390, 397, 402, 404], 10: [140, 168, 179, 235], 299: [15, 97, 102, 122, 174, 182, 200, 204, 245, 265, 315], 12: [44, 82, 130, 135, 164, 316, 374, 380], 173: [22, 25, 36, 47, 55, 70, 89, 95, 101, 123, 167, 207, 214, 248, 259, 290, 291, 317, 361], 334: [17, 29, 31, 59, 78, 115, 151, 165, 176, 191, 220, 221, 247, 250, 296, 310, 311, 320, 379, 398, 400], 79: [38, 53, 92, 117, 124, 150, 201, 373], 336: [39, 58, 107, 109, 112, 229, 236, 262, 269, 273, 279, 287, 301, 375, 381, 391], 83: [111, 280, 281], 84: [162], 213: [56, 125, 144], 407: [0, 7, 26, 30, 60, 71, 87, 106, 108, 116, 121, 139, 142, 146, 152, 154, 166, 187, 211, 222, 224, 228, 240, 244, 249, 258, 272, 277, 278, 289, 300, 304, 312, 313, 327, 328, 332, 337, 339, 345, 353, 354, 357, 362, 364, 370, 378, 383, 392, 395, 396, 405, 408, 411], 4: [2, 11, 18, 24, 28, 32, 33, 40, 43, 49, 62, 65, 66, 77, 86, 90, 105, 119, 141, 143, 160, 163, 169, 170, 180, 183, 184, 186, 196, 197, 205, 208, 210, 234, 238, 251, 255, 256, 263, 267, 282, 284, 286, 295, 302, 307, 318, 325, 333, 335, 346, 348, 349, 355, 356, 358, 369, 387, 394, 406, 418], 218: [21, 72, 76, 80, 103, 149, 171, 172, 178, 185, 188, 189, 212, 215, 264, 275, 276, 321, 324, 331, 359, 368, 389, 421], 266: [9, 34, 35, 54, 69, 85, 93, 96, 98, 99, 114, 120, 126, 136, 137, 138, 158, 193, 194, 209, 225, 226, 232, 233, 297, 308, 338, 341, 343, 360, 367, 385, 420]}
         self.doc_ID_list=[] # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
         start = time.time()
         self.get_stop_words()
@@ -32,10 +32,11 @@ class index:
         end = time.time()
         print("Index built in ", (end - start), " seconds.")
         self.calculate_doc_lengths()
+        # self.get_clusters()
         # self.print_dict()
         # probably don't need print(self.word_count_per_doc)
         # self.print_dict()
-        # self.ask_for_query()
+        self.ask_for_query()
         # print('exact query:')
         # self.exact_query()
         # self.ask_for_query()
@@ -177,15 +178,54 @@ class index:
         query = input("Enter your query: ")
         self.query_terms = self.convert_string_to_list(query)
         self.create_query_dict()
-        # create dictionary to keep track of word occurrences in query
+
+    def get_query_denominator(self):
+        denominator_query = 0
+        for query_key in self.query_tf_idf_dict:
+            denominator_query += self.query_tf_idf_dict[query_key] * self.query_tf_idf_dict[query_key]
+        denominator_query = math.sqrt(denominator_query)
+
+        return denominator_query
 
     def inexact_query_cluster_pruning(self):
-        # TODO do this function now
+        self.get_query_tf_idf_dict()
+
+        denominator_query = self.get_query_denominator()
+
+        leaders = []
+        for id in self.cluster_dict:
+            leaders.append(id)
+
+        leader_cosines = {}
+
+        for doc in leaders:
+            numerator = 0
+            doc_denominator = self.doc_lengths[doc]
+
+            for word, value in self.query_dict.items():
+                word_idf = value[1]
+                word_query_tf_idf = value[0] * word_idf
+
+                if word not in self.stop_words:
+                    doc_list = self.dictionary[word]
+                    for doc in doc_list:
+                        if doc != doc_list[0] and doc[0] == doc:
+                            word_tf = doc[1]
+                            word_tf_idf = word_tf * word_idf
+                            numerator += word_tf_idf * word_query_tf_idf
+
+            # calculate cosine similarity between doc and query
+            cosine = numerator/(doc_denominator*denominator_query)
+            leader_cosines[doc] = cosine
+            # print(leader, 'HAS A cosine of', )
+        print(leader_cosines)
+
+    def get_clusters(self):
         lead_follow_list = self.get_leaders_and_followers()
         leaders = lead_follow_list[0]
         followers = lead_follow_list[1]
-        print(leaders)
-        print(followers)
+        # print(leaders)
+        # print(followers)
         cluster_dict = {}
         for leader in leaders:
             cluster_dict[leader] = []
@@ -314,11 +354,7 @@ class index:
 
         self.get_tf_idf_dicts()
 
-        # get query denominator
-        denominator_query = 0
-        for query_key in self.query_tf_idf_dict:
-            denominator_query += self.query_tf_idf_dict[query_key] * self.query_tf_idf_dict[query_key]
-        denominator_query = math.sqrt(denominator_query)
+        denominator_query = self.get_query_denominator()
 
         top_k_dictionary = {}
         # for each text id held in index_tf_idf_dict
