@@ -37,10 +37,10 @@ class index:
         # self.get_clusters()
 
         # self.exact_query()
-        # self.inexact_query_champion()
+        self.inexact_query_champion()
         # self.inexact_query_champion()
         # self.exact_query()
-        self.inexact_query_cluster_pruning()
+        # self.inexact_query_cluster_pruning()
         # self.inexact_query_cluster_pruning()
         # self.inexact_query_index_elimination()
         # self.inexact_query_index_elimination()
@@ -211,16 +211,19 @@ class index:
         # print('leaders:', leaders)
         top_k_leaders = self.get_ordered_cosines_from_list(leaders, denominator_query, top_k_leaders)
         # print('top leaders:', top_k_leaders)
+
         top_k_list = []
         for key in top_k_leaders:
-            top_k_list = self.add_returned_values_to_top_k(key, denominator_query, top_k_list)
+            top_k_list = self.add_returned_values_to_top_k(key[0], denominator_query, top_k_list)
             if len(top_k_list) >= self.top_k:
                 break
         end = time.time()
         print('Query length =', self.query_length)
         print('Top ', self.top_k, ' results for the query \'', self.query_string, '\' using cluster pruning method are:', sep='')
+        j = 1
         for doc in top_k_list:
-            print(self.doc_ID_list[doc])
+            print(j, '. ', self.doc_ID_list[doc[0]], ' with a score of ', doc[1], sep='')
+            j += 1
         print('Results found in', end - start, 'seconds')
         print('')
 
@@ -271,7 +274,7 @@ class index:
         sorted_cosine_list = sorted(cosine_dict.items(), key=lambda x: x[1], reverse=True)
 
         for doc in sorted_cosine_list:
-            top_k_list.append(doc[0])
+            top_k_list.append(doc)
             if len(top_k_list) >= self.top_k:
                 break
 
@@ -397,7 +400,7 @@ class index:
             self.champion_list[key] = temp_list
         self.dictionary.clear()
         self.dictionary = self.champion_list
-        self.query_helper()
+        self.query_helper('champion list')
 
     def r_formula(self, num_of_docs_with_term):
         if num_of_docs_with_term >= 10:
@@ -439,15 +442,18 @@ class index:
             top_k_dictionary[index_key] = cosine_sim
 
         top_k_dictionary_sorted_keys = sorted(top_k_dictionary, key=top_k_dictionary.get, reverse=True)
+
         i = self.top_k
         end = time.time()
         print('Query length =', self.query_length)
         print('Top ', self.top_k, ' results for the query \'', self.query_string, '\' using ', retrieval_type, ' method are:', sep='')
+        j = 1
         for r in top_k_dictionary_sorted_keys:
             for index, item in enumerate(self.doc_ID_list):
                 if r == index:
-                    print(item)
+                    print(j, '. ', item, ' with score ', top_k_dictionary[index], sep='')
                     i -= 1
+                    j += 1
                     break
             if i == 0:
                 break
@@ -479,9 +485,9 @@ class index:
         self.query_dict.clear()
         self.query_dict = temp_dict_2
         self.query_terms = temp_query_list
-        print('query terms: ', self.query_terms)
+        print('Query terms searched: ', self.query_terms)
         # now that query dict has been halved simply call exact_query to function on the halved query
-        self.query_helper()
+        self.query_helper('index elimination')
 
     def get_tf_idf_dicts(self):
         self.get_query_tf_idf_dict()
