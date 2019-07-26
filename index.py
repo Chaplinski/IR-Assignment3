@@ -11,6 +11,7 @@ class index:
     def __init__(self,path):
         self.collection=path
         self.dictionary={}
+        self.dictionary_permanent = {}
         self.query_terms=[]
         self.query_string=''
         self.query_dict={}
@@ -33,20 +34,39 @@ class index:
         print("TF-IDF Index built in ", (end - start), " seconds.")
         self.calculate_doc_lengths()
         self.calculate_champion_list()
-        self.get_clusters()
+        # self.get_clusters()
+        # print(self.champion_list)
 
+        self.exact_query()
+        # self.exact_query()
+        # self.exact_query()
         # self.exact_query()
         self.inexact_query_champion()
         self.inexact_query_champion()
         self.inexact_query_champion()
-        # self.inexact_query_champion()
-        # self.exact_query()
-        # self.inexact_query_cluster_pruning()
-        # self.inexact_query_cluster_pruning()
-        # self.inexact_query_index_elimination()
-        # self.inexact_query_index_elimination()
-        # self.exact_query()
-        # self.exact_query()
+        self.inexact_query_index_elimination()
+        self.inexact_query_cluster_pruning()
+
+        self.exact_query()
+        self.inexact_query_champion()
+        self.inexact_query_index_elimination()
+        self.inexact_query_cluster_pruning()
+
+        self.exact_query()
+        self.inexact_query_champion()
+        self.inexact_query_index_elimination()
+        self.inexact_query_cluster_pruning()
+
+        self.exact_query()
+        self.inexact_query_champion()
+        self.inexact_query_index_elimination()
+        self.inexact_query_cluster_pruning()
+
+        self.exact_query()
+        self.inexact_query_champion()
+        self.inexact_query_index_elimination()
+        self.inexact_query_cluster_pruning()
+
 
 
     def buildIndex(self):
@@ -62,6 +82,7 @@ class index:
             tokens = re.split('\W+',lines.lower());
             self.insert_terms(tokens, docID)
         self.dictionary = collections.OrderedDict(sorted(self.dictionary.items()))
+        self.dictionary_permanent = self.dictionary
 
     def insert_terms(self,tokens,docID):
         #add terms to the dict data structure
@@ -349,11 +370,12 @@ class index:
         # Function for exact top K retrieval using champion list (method 2)
         # Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
         self.ask_for_query()
+        self.dictionary = self.champion_list
         self.query_helper('champion list')
+        self.dictionary = self.dictionary_permanent
 
     def calculate_champion_list(self):
-        self.champion_list.clear()
-        self.query_terms.clear()
+        start = time.time()
         for key, value in self.dictionary.items():
             num_of_docs_with_term = len(value) - 1
             # set r
@@ -373,8 +395,9 @@ class index:
                 if r == 0:
                     break
             self.champion_list[key] = temp_list
-        self.dictionary.clear()
-        self.dictionary = self.champion_list
+
+        end = time.time()
+        print('Champion list built in', (end-start), 'seconds')
 
     def r_formula(self, num_of_docs_with_term):
         if num_of_docs_with_term >= 10:
@@ -396,7 +419,7 @@ class index:
         self.query_helper('exact retrieval')
 
     def query_helper(self, retrieval_type):
-        start = time.time()
+        start = time.perf_counter()
         self.get_tf_idf_dicts()
 
         denominator_query = self.get_query_denominator()
@@ -418,7 +441,7 @@ class index:
         top_k_dictionary_sorted_keys = sorted(top_k_dictionary, key=top_k_dictionary.get, reverse=True)
 
         i = self.top_k
-        end = time.time()
+        end = time.perf_counter()
         print('Query length =', self.query_length)
         print('Top ', self.top_k, ' results for the query \'', self.query_string, '\' using ', retrieval_type, ' method are:', sep='')
         j = 1
