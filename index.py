@@ -13,13 +13,13 @@ class index:
         self.collection=path
         self.dictionary={}
         # probably don't need self.word_count_per_doc=[]
-        self.query_terms=''
+        self.query_terms=[]
         self.query_dict={}
         self.stop_words=[]
         self.query_tf_idf_dict={}
         self.index_tf_idf_dict={}
         self.champion_list = {}
-        self.top_k = 10
+        self.top_k = 20
         self.doc_lengths=[]
         self.cluster_dict={192: [42, 48, 91, 100, 104, 148, 181, 206, 230, 231, 237, 261, 283, 350, 386, 403], 352: [1, 6, 14, 16, 50, 51, 110, 219, 274, 288, 298, 384, 410, 415], 388: [5, 41, 57, 74, 75, 118, 128, 131, 195, 330, 371, 382, 399, 409, 413], 134: [8, 20, 23, 37, 45, 46, 52, 81, 88, 113, 132, 147, 153, 156, 198, 203, 227, 241, 243, 246, 253, 271, 294, 305, 314, 340, 363, 366, 377, 401, 412, 417, 419], 257: [67, 127, 347, 414, 416], 393: [3, 13, 19, 27, 61, 63, 64, 68, 73, 94, 129, 133, 145, 155, 157, 159, 161, 175, 177, 190, 199, 202, 216, 217, 223, 239, 242, 252, 254, 260, 268, 270, 285, 292, 293, 303, 306, 309, 319, 322, 323, 326, 329, 342, 344, 351, 365, 372, 376, 390, 397, 402, 404], 10: [140, 168, 179, 235], 299: [15, 97, 102, 122, 174, 182, 200, 204, 245, 265, 315], 12: [44, 82, 130, 135, 164, 316, 374, 380], 173: [22, 25, 36, 47, 55, 70, 89, 95, 101, 123, 167, 207, 214, 248, 259, 290, 291, 317, 361], 334: [17, 29, 31, 59, 78, 115, 151, 165, 176, 191, 220, 221, 247, 250, 296, 310, 311, 320, 379, 398, 400], 79: [38, 53, 92, 117, 124, 150, 201, 373], 336: [39, 58, 107, 109, 112, 229, 236, 262, 269, 273, 279, 287, 301, 375, 381, 391], 83: [111, 280, 281], 84: [162], 213: [56, 125, 144], 407: [0, 7, 26, 30, 60, 71, 87, 106, 108, 116, 121, 139, 142, 146, 152, 154, 166, 187, 211, 222, 224, 228, 240, 244, 249, 258, 272, 277, 278, 289, 300, 304, 312, 313, 327, 328, 332, 337, 339, 345, 353, 354, 357, 362, 364, 370, 378, 383, 392, 395, 396, 405, 408, 411], 4: [2, 11, 18, 24, 28, 32, 33, 40, 43, 49, 62, 65, 66, 77, 86, 90, 105, 119, 141, 143, 160, 163, 169, 170, 180, 183, 184, 186, 196, 197, 205, 208, 210, 234, 238, 251, 255, 256, 263, 267, 282, 284, 286, 295, 302, 307, 318, 325, 333, 335, 346, 348, 349, 355, 356, 358, 369, 387, 394, 406, 418], 218: [21, 72, 76, 80, 103, 149, 171, 172, 178, 185, 188, 189, 212, 215, 264, 275, 276, 321, 324, 331, 359, 368, 389, 421], 266: [9, 34, 35, 54, 69, 85, 93, 96, 98, 99, 114, 120, 126, 136, 137, 138, 158, 193, 194, 209, 225, 226, 232, 233, 297, 308, 338, 341, 343, 360, 367, 385, 420]}
         self.doc_ID_list=[] # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
@@ -32,18 +32,14 @@ class index:
         end = time.time()
         print("Index built in ", (end - start), " seconds.")
         self.calculate_doc_lengths()
-        # self.get_clusters()
-        # self.print_dict()
-        # probably don't need print(self.word_count_per_doc)
-        # self.print_dict()
-        self.ask_for_query()
-        # print('exact query:')
-        # self.exact_query()
-        # self.ask_for_query()
-        # print('inexact query:')
-        # self.inexact_query_index_elimination()
+
+        self.exact_query()
         # self.inexact_query_champion()
-        self.inexact_query_cluster_pruning()
+        # self.inexact_query_champion()
+        # self.exact_query()
+        # self.inexact_query_cluster_pruning()
+        # self.inexact_query_index_elimination()
+
 
     def buildIndex(self):
         #Function to read documents from collection, tokenize and build the index with tokens
@@ -173,10 +169,15 @@ class index:
 
     # get query and store terms as a list
     def ask_for_query(self):
+        self.query_dict.clear()
         self.query_tf_idf_dict.clear()
         self.index_tf_idf_dict.clear()
+        self. query_terms.clear()
         query = input("Enter your query: ")
-        self.query_terms = self.convert_string_to_list(query)
+        temp_terms = self.convert_string_to_list(query)
+        for word in temp_terms:
+            if word in self.dictionary:
+                self.query_terms.append(word)
         self.create_query_dict()
 
     def get_query_denominator(self):
@@ -188,6 +189,7 @@ class index:
         return denominator_query
 
     def inexact_query_cluster_pruning(self):
+        self.ask_for_query()
         self.get_query_tf_idf_dict()
 
         denominator_query = self.get_query_denominator()
@@ -197,30 +199,40 @@ class index:
             leaders.append(id)
 
         # this list holds the leaders in the order of highest query cosine similarity to lowest
-        leader_cosine_list = self.get_ordered_cosines_from_list(leaders, denominator_query)
-
-        for key in leader_cosine_list:
-            # create list based on leader chosen
-            docs_to_be_sorted = self.cluster_dict[key[0]]
-            print(key[0])
-            # add leader to list
-            docs_to_be_sorted.append(key[0])
-
-            i = self.top_k
-            top_k_list = []
-            follower_cosine_list = self.get_ordered_cosines_from_list(docs_to_be_sorted, denominator_query)
-            for doc in follower_cosine_list:
-                doc_to_append = self.doc_ID_list[doc[0]]
-                print(doc_to_append)
-                sys.exit()
-                top_k_list.append(doc_to_append)
-                if len(top_k_list) >= self.top_k:
-                    break
-            print(top_k_list)
-            sys.exit()
+        top_k_leaders = []
+        # print('leaders:', leaders)
+        top_k_leaders = self.get_ordered_cosines_from_list(leaders, denominator_query, top_k_leaders)
+        # print('top leaders:', top_k_leaders)
+        top_k_list = []
+        for key in top_k_leaders:
+            top_k_list = self.add_returned_values_to_top_k(key, denominator_query, top_k_list)
+            if len(top_k_list) >= self.top_k:
+                break
+        print('Cluster Pruning Top K:')
+        for doc in top_k_list:
+            print(self.doc_ID_list[doc])
 
 
-    def get_ordered_cosines_from_list(self, documents, denominator_query):
+    def add_returned_values_to_top_k(self, key, denominator_query, top_k_list):
+
+        # create list based on leader chosen
+        docs_to_be_sorted = self.cluster_dict[key]
+        # add leader to list
+        docs_to_be_sorted.append(key)
+
+        top_k_list = self.get_ordered_cosines_from_list(docs_to_be_sorted, denominator_query, top_k_list)
+        # print('append:', append_to_top_k)
+        #
+        # for item in append_to_top_k:
+        #     top_k_list.append(item)
+        #
+        # print('top k:', top_k_list)
+        # sys.exit()
+
+        return top_k_list
+
+
+    def get_ordered_cosines_from_list(self, documents, denominator_query, top_k_list):
         cosine_dict = {}
 
         for document in documents:
@@ -246,7 +258,12 @@ class index:
         #print(cosine_dict)
         sorted_cosine_list = sorted(cosine_dict.items(), key=lambda x: x[1], reverse=True)
 
-        return sorted_cosine_list
+        for doc in sorted_cosine_list:
+            top_k_list.append(doc[0])
+            if len(top_k_list) >= self.top_k:
+                break
+
+        return top_k_list
 
     def get_clusters(self):
         lead_follow_list = self.get_leaders_and_followers()
@@ -340,6 +357,9 @@ class index:
     def inexact_query_champion(self):
         # Function for exact top K retrieval using champion list (method 2)
         # Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
+        self.champion_list.clear()
+        self.query_terms.clear()
+        self.ask_for_query()
         for key, value in self.dictionary.items():
             num_of_docs_with_term = len(value) - 1
             # set r
@@ -361,7 +381,7 @@ class index:
             self.champion_list[key] = temp_list
         self.dictionary.clear()
         self.dictionary = self.champion_list
-        self.exact_query()
+        self.exact_query_helper()
 
     def r_formula(self, num_of_docs_with_term):
         if num_of_docs_with_term >= 10:
@@ -379,7 +399,10 @@ class index:
     def exact_query(self):
         # #function for exact top K retrieval (method 1)
         # #Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
+        self.ask_for_query()
+        self.exact_query_helper()
 
+    def exact_query_helper(self):
         self.get_tf_idf_dicts()
 
         denominator_query = self.get_query_denominator()
@@ -413,6 +436,7 @@ class index:
     def inexact_query_index_elimination(self):
         # function for exact top K retrieval using index elimination (method 3)
         # Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
+        self.ask_for_query()
         temp_dict = {}
         for key, value in self.query_dict.items():
             temp_dict[key] = value[1]
@@ -436,7 +460,7 @@ class index:
         self.query_terms = temp_query_list
         print('query terms: ', self.query_terms)
         # now that query dict has been halved simply call exact_query to function on the halved query
-        self.exact_query()
+        self.exact_query_helper()
 
     def get_tf_idf_dicts(self):
         self.get_query_tf_idf_dict()
