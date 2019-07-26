@@ -11,7 +11,6 @@ class index:
     def __init__(self,path):
         self.collection=path
         self.dictionary={}
-        # probably don't need self.word_count_per_doc=[]
         self.query_terms=[]
         self.query_string=''
         self.query_dict={}
@@ -34,7 +33,7 @@ class index:
         print("TF-IDF Index built in ", (end - start), " seconds.")
         self.calculate_doc_lengths()
         self.calculate_champion_list()
-        # self.get_clusters()
+        self.get_clusters()
 
         # self.exact_query()
         self.inexact_query_champion()
@@ -105,7 +104,6 @@ class index:
             print('Doc ID: ', index, ' ==> ',item)
 
     def calculate_idf(self):
-
         # for each term in dictionary calculate and add the IDF
         for key, value in self.dictionary.items():
             # calculate IDF
@@ -229,7 +227,6 @@ class index:
         print('Results found in', end - start, 'seconds')
         print('')
 
-
     def add_returned_values_to_top_k(self, key, denominator_query, top_k_list):
 
         # create list based on leader chosen
@@ -238,16 +235,8 @@ class index:
         docs_to_be_sorted.append(key)
 
         top_k_list = self.get_ordered_cosines_from_list(docs_to_be_sorted, denominator_query, top_k_list)
-        # print('append:', append_to_top_k)
-        #
-        # for item in append_to_top_k:
-        #     top_k_list.append(item)
-        #
-        # print('top k:', top_k_list)
-        # sys.exit()
 
         return top_k_list
-
 
     def get_ordered_cosines_from_list(self, documents, denominator_query, top_k_list):
         cosine_dict = {}
@@ -271,7 +260,6 @@ class index:
             # calculate cosine similarity between doc and query
             cosine = numerator/(doc_denominator*denominator_query)
             cosine_dict[document] = cosine
-            # print(leader, 'HAS A cosine of', )
 
         sorted_cosine_list = sorted(cosine_dict.items(), key=lambda x: x[1], reverse=True)
 
@@ -283,13 +271,12 @@ class index:
         return top_k_list
 
     def get_clusters(self):
+        print('Calculating clusters...')
         self.cluster_dict.clear()
         start = time.time()
         lead_follow_list = self.get_leaders_and_followers()
         leaders = lead_follow_list[0]
         followers = lead_follow_list[1]
-        # print(leaders)
-        # print(followers)
         cluster_dict = {}
         for leader in leaders:
             cluster_dict[leader] = []
@@ -305,7 +292,6 @@ class index:
                         for key, value in self.dictionary.items():
                             leader_tf_idf = 0
                             follower_tf_idf = 0
-                            # print(key, value)
                             doc_idf = value[0]
                             # for every document that contains this word
                             for doc in value:
@@ -314,37 +300,22 @@ class index:
                                     # if this document is the leader document
                                     if doc[0] == leader:
                                         leader_tf_idf = doc[1] * doc_idf
-                                        # print(doc)
-                                        # print(doc[0])
-                                        # print(doc[1])
-                                        # print('leader tfidf:', leader_tf_idf)
-                                        # sys.exit()
                                     elif doc[0] == follower:
                                         follower_tf_idf = doc[1] * doc_idf
-                                        # print(doc)
-                                        # print(doc[0])
-                                        # print(doc[1])
-                                        # print('follower tfidf:', follower_tf_idf)
-                                        # sys.exit()
                                     # if tf-idf of leader and follower have already been found then move to next word
                                     if leader_tf_idf > 0 and follower_tf_idf > 0:
                                         break
-                        # if there is a tfidf value for this word for the leader and follower add their product to numerator
+                            # if there is a tfidf value for this word for the leader and follower add their product to numerator
                             if leader_tf_idf > 0 and follower_tf_idf > 0:
                                 numerator += leader_tf_idf * follower_tf_idf
                         doc_similarity = numerator / (self.doc_lengths[leader] * self.doc_lengths[follower])
-                        # print('leader', leader, 'follower', follower, 'similarity:', doc_similarity)
 
                         numerator = 0
 
                     if doc_similarity > current_best_cosine:
                         current_best_cosine = doc_similarity
                         current_best_leader = leader
-                # print(current_best_cosine)
-                # print(current_best_leader)
                 cluster_dict[current_best_leader].append(follower)
-                # print(cluster_dict)
-                # sys.exit()
         self.cluster_dict = cluster_dict
         end = time.time()
         print("Cluster Prunning index built in", (end-start), "seconds.")
@@ -373,7 +344,6 @@ class index:
                 break
 
         return [leader_list, follower_list]
-
 
     def inexact_query_champion(self):
         # Function for exact top K retrieval using champion list (method 2)
@@ -498,7 +468,6 @@ class index:
         self.get_index_tf_idf_dict()
 
     def get_query_tf_idf_dict(self):
-        # print(self.query_dict)
         # for each word in the query
         for word, list in self.query_dict.items():
             if word not in self.stop_words:
@@ -509,15 +478,12 @@ class index:
     def get_index_tf_idf_dict(self):
         # for each word in the query
         for key in self.query_tf_idf_dict:
-            # print('word:', key)
             # get idf
             idf = self.dictionary[key][0]
             # print('idf:', idf)
             for item in self.dictionary[key]:
                 # get every item
                 if item != self.dictionary[key][0]:
-                    # print(item)
-                    # sys.exit()
                     tf = item[1]
                     tf_idf = idf * tf
 
@@ -555,7 +521,6 @@ class index:
             # store w and idf as value for word key in this dict
             this_dict[key] = [w, idf]
         self.query_dict = this_dict
-        # print('original query dict:', self.query_dict)
 
     def get_stop_words(self):
         f = open('stop-list/stop-list.txt', "r")
