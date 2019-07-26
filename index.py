@@ -196,11 +196,15 @@ class index:
         for id in self.cluster_dict:
             leaders.append(id)
 
-        leader_cosines = {}
+        cosine_dict = self.get_ordered_cosines_from_list(leaders, denominator_query)
+        print(cosine_dict)
 
-        for doc in leaders:
+    def get_ordered_cosines_from_list(self, documents, denominator_query):
+        cosine_dict = {}
+
+        for document in documents:
             numerator = 0
-            doc_denominator = self.doc_lengths[doc]
+            doc_denominator = self.doc_lengths[document]
 
             for word, value in self.query_dict.items():
                 word_idf = value[1]
@@ -209,16 +213,19 @@ class index:
                 if word not in self.stop_words:
                     doc_list = self.dictionary[word]
                     for doc in doc_list:
-                        if doc != doc_list[0] and doc[0] == doc:
+                        if doc != doc_list[0] and doc[0] == document:
                             word_tf = doc[1]
                             word_tf_idf = word_tf * word_idf
                             numerator += word_tf_idf * word_query_tf_idf
 
             # calculate cosine similarity between doc and query
             cosine = numerator/(doc_denominator*denominator_query)
-            leader_cosines[doc] = cosine
+            cosine_dict[document] = cosine
             # print(leader, 'HAS A cosine of', )
-        print(leader_cosines)
+
+        sorted_cosine_dict = sorted(cosine_dict.items(), key=lambda x: x[1], reverse=True)
+
+        return sorted_cosine_dict
 
     def get_clusters(self):
         lead_follow_list = self.get_leaders_and_followers()
