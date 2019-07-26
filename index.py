@@ -5,7 +5,6 @@ import collections
 import time
 import math
 import sys
-import json
 import random
 
 class index:
@@ -34,9 +33,12 @@ class index:
         end = time.time()
         print("TF-IDF Index built in ", (end - start), " seconds.")
         self.calculate_doc_lengths()
+        self.calculate_champion_list()
         # self.get_clusters()
 
         # self.exact_query()
+        self.inexact_query_champion()
+        self.inexact_query_champion()
         self.inexact_query_champion()
         # self.inexact_query_champion()
         # self.exact_query()
@@ -376,9 +378,12 @@ class index:
     def inexact_query_champion(self):
         # Function for exact top K retrieval using champion list (method 2)
         # Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
+        self.ask_for_query()
+        self.query_helper('champion list')
+
+    def calculate_champion_list(self):
         self.champion_list.clear()
         self.query_terms.clear()
-        self.ask_for_query()
         for key, value in self.dictionary.items():
             num_of_docs_with_term = len(value) - 1
             # set r
@@ -400,7 +405,6 @@ class index:
             self.champion_list[key] = temp_list
         self.dictionary.clear()
         self.dictionary = self.champion_list
-        self.query_helper('champion list')
 
     def r_formula(self, num_of_docs_with_term):
         if num_of_docs_with_term >= 10:
