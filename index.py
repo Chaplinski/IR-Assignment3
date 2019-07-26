@@ -196,8 +196,29 @@ class index:
         for id in self.cluster_dict:
             leaders.append(id)
 
-        cosine_dict = self.get_ordered_cosines_from_list(leaders, denominator_query)
-        print(cosine_dict)
+        # this list holds the leaders in the order of highest query cosine similarity to lowest
+        leader_cosine_list = self.get_ordered_cosines_from_list(leaders, denominator_query)
+
+        for key in leader_cosine_list:
+            # create list based on leader chosen
+            docs_to_be_sorted = self.cluster_dict[key[0]]
+            print(key[0])
+            # add leader to list
+            docs_to_be_sorted.append(key[0])
+
+            i = self.top_k
+            top_k_list = []
+            follower_cosine_list = self.get_ordered_cosines_from_list(docs_to_be_sorted, denominator_query)
+            for doc in follower_cosine_list:
+                doc_to_append = self.doc_ID_list[doc[0]]
+                print(doc_to_append)
+                sys.exit()
+                top_k_list.append(doc_to_append)
+                if len(top_k_list) >= self.top_k:
+                    break
+            print(top_k_list)
+            sys.exit()
+
 
     def get_ordered_cosines_from_list(self, documents, denominator_query):
         cosine_dict = {}
@@ -222,10 +243,10 @@ class index:
             cosine = numerator/(doc_denominator*denominator_query)
             cosine_dict[document] = cosine
             # print(leader, 'HAS A cosine of', )
+        #print(cosine_dict)
+        sorted_cosine_list = sorted(cosine_dict.items(), key=lambda x: x[1], reverse=True)
 
-        sorted_cosine_dict = sorted(cosine_dict.items(), key=lambda x: x[1], reverse=True)
-
-        return sorted_cosine_dict
+        return sorted_cosine_list
 
     def get_clusters(self):
         lead_follow_list = self.get_leaders_and_followers()
