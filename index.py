@@ -4,7 +4,8 @@ import os
 import collections
 import time
 import math
-import random
+import string
+import sys
 #import other modules as needed
 
 class index:
@@ -12,6 +13,11 @@ class index:
         self.collection = path
         self.dictionary = {}
         self.query_terms = []
+        self.relevant_docs_list = []
+        self.non_relevant_docs_list = []
+        self.alpha = 1
+        self.beta = 0.75
+        self.gamma = 0.15
         self.query_string = ''
         self.query_dict = {}
         self.stop_words = []
@@ -30,7 +36,8 @@ class index:
         end = time.time()
         print("TF-IDF Index built in ", (end - start), " seconds.")
         self.calculate_doc_lengths()
-        self.exact_query()
+        # print(self.dictionary)
+        self.rocchio()
 
     def buildIndex(self):
         # Function to read documents from collection, tokenize and build the index with tokens
@@ -45,7 +52,7 @@ class index:
             lines = open(self.collection + filename).read()
             tokens = re.split('\W+', lines.lower());
             self.insert_terms(tokens, docID)
-        self.dictionary = collections.OrderedDict(sorted(self.dictionary.items()))
+        #self.dictionary = collections.OrderedDict(sorted(self.dictionary.items()))
 
     def insert_terms(self,tokens,docID):
         #add terms to the dict data structure
@@ -70,13 +77,6 @@ class index:
                 else:   #new docID for this tok
                     item=[(docID,[pos])]
                     self.dictionary[tok]=item
-
-    def rocchio(self, query_terms, pos_feedback, neg_feedback, alpha, beta, gamma):
-        # function to implement rocchio algorithm
-        # pos_feedback - documents deemed to be relevant by the user
-        # neg_feedback - documents deemed to be non-relevant by the user
-        # Return the new query  terms and their weights
-        print('')
 
     def query(self, query_terms, k):
         # function for exact top K retrieval using cosine similarity
@@ -213,11 +213,70 @@ class index:
             this_dict[key] = [w, idf]
         self.query_dict = this_dict
 
+    def rocchio(self):
+        # function to implement rocchio algorithm
+        # pos_feedback - documents deemed to be relevant by the user
+        # neg_feedback - documents deemed to be non-relevant by the user
+        # Return the new query  terms and their weights
+        self.exact_query()
+        self.get_relevant_doc_ids()
+
+        # dictionary of words that appear in one or more document flagged as relevant
+        shared_dictionary = {}
+        for doc_id in self.relevant_docs_list:
+            document_name = self.doc_ID_list[doc_id]
+            with open('collection/' + document_name, "r") as file:
+                full_document = file.read()
+
+            full_document = full_document.translate(str.maketrans('', '', string.punctuation))
+            full_document_word_list = full_document.split()
+
+            print('Full doc word list:', full_document_word_list)
+            # for every word in a document
+            for word in full_document_word_list:
+                # if in main index and not a stop word and not already in shared dict
+                if word in self.dictionary:
+                    print('word:', word)
+                    # set the idf
+                    word_values = self.dictionary[word]
+                    idf = word_values[0]
+                    # set total tf-idf of all relevant docs combined
+                    relevant_tf_idf_total = 0
+                    non_relevant_tf_idf_total = 0
+                    # for each document that has this word
+                    for docs_containing_word in word_values:
+                        # if the document is in the relevant_docs_list
+                        if docs_containing_word != word_values[0] and docs_containing_word[0] in self.relevant_docs_list:
+
+                            tf_idf = docs_containing_word[1] * idf
+                            relevant_tf_idf_total += tf_idf
+                            # print('document', docs_containing_word[0], 'tf-idf', tf_idf)
+
+                        elif docs_containing_word != word_values[0] and docs_containing_word[0] in self.non_relevant_docs_list:
+                            tf_idf = docs_containing_word[1] * idf
+                            non_relevant_tf_idf_total += tf_idf
+                            # print('document', docs_containing_word[0], 'tf-idf', tf_idf)
+
+                    shared_dictionary[word] = [relevant_tf_idf_total, non_relevant_tf_idf_total]
+        print(shared_dictionary)
+        sys.exit()
+
+    def get_relevant_doc_ids(self):
+        relevant_docs_string = input('Enter relevant document ids separated by space:')
+        non_relevant_docs_string = input('Enter non relevant document ids separated by space:')
+        relevant_docs_list = relevant_docs_string.split()
+        self.relevant_docs_list = list(map(int, relevant_docs_list))
+        non_relevant_docs_list = non_relevant_docs_string.split()
+        self.non_relevant_docs_list = list(map(int, non_relevant_docs_list))
+        print('Relevant documents:', self.relevant_docs_list)
+        print('Non relevant documents', self.non_relevant_docs_list)
+
     def exact_query(self):
         # #function for exact top K retrieval (method 1)
         # #Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
         self.ask_for_query()
         self.query_helper('exact retrieval')
+
 
     def query_helper(self, retrieval_type):
         start = time.perf_counter()
