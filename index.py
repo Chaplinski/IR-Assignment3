@@ -222,6 +222,7 @@ class index:
         # Return the new query  terms and their weights
         self.exact_query()
         self.get_relevant_doc_ids()
+        start = time.perf_counter()
         self.calculate_shared_dictionary()
 
         for term in self.shared_dictionary:
@@ -251,12 +252,11 @@ class index:
 
             self.new_dictionary[term] = new_tf_idf
 
+        end = time.perf_counter()
+        print('New query computed in', (end-start), 'seconds.')
         print(self.query_tf_idf_dict)
         print(self.new_dictionary)
         sys.exit()
-
-
-
 
     def calculate_shared_dictionary(self):
         for doc_id in self.relevant_docs_list:
@@ -335,7 +335,7 @@ class index:
         i = self.top_k
         end = time.perf_counter()
         print('Query length =', self.query_length)
-        print('Top ', self.top_k, ' results for the query \'', self.query_string, '\' using ', retrieval_type, ' method are:', sep='')
+        print('Top ', self.top_k, ' results for the query \'', self.query_string, '\' are:', sep='')
         j = 1
         for r in top_k_dictionary_sorted_keys:
             for index, item in enumerate(self.doc_ID_list):
