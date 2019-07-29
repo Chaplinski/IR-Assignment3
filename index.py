@@ -102,7 +102,7 @@ class index:
 
     def get_query_tf_idf_dict(self):
         # for each word in the query
-        print('HERE:', self.query_dict)
+        # print('HERE:', self.query_dict)
         for word, list in self.query_dict.items():
             if word not in self.stop_words:
                 # get tf-idf and store it
@@ -228,8 +228,8 @@ class index:
         self.calculate_new_query()
         end = time.perf_counter()
         print('New query computed in', (end - start), 'seconds.')
-        print('Original query tf-idf dict', self.query_tf_idf_dict)
-        print('New query:', self.new_dictionary)
+        # print('Original query tf-idf dict', self.query_tf_idf_dict)
+        print('New query terms with weights:', self.new_dictionary)
         continue_querying = input('Continue with new query (y/n):')
         if continue_querying == 'y':
             self.continue_querying()
@@ -257,6 +257,11 @@ class index:
         self.get_tf_idf_dicts()
 
         denominator_query = self.get_query_denominator()
+
+        # print('query terms 2nd iteration:', self.query_terms)
+        # print('shared documents', self.shared_dictionary)
+        # sys.exit()
+
         top_k_dictionary = {}
         # for each text id held in index_tf_idf_dict
         for index_key, index_dictionary in self.index_tf_idf_dict.items():
@@ -275,7 +280,7 @@ class index:
 
         i = self.top_k
         end = time.perf_counter()
-        print('Query length =', self.query_length)
+        # print('Query length =', self.query_length)
         print('Top ', self.top_k, ' results for the query \'', self.query_string, '\' are:', sep='')
         j = 1
         for r in top_k_dictionary_sorted_keys:
@@ -289,6 +294,16 @@ class index:
                 break
         print('Results found in', (end-start),'seconds')
         print('')
+
+        self.get_relevant_doc_ids()
+        self.calculate_shared_dictionary()
+        self.calculate_new_query()
+        print('New query terms with weights:', self.new_dictionary)
+        continue_querying = input('Continue with new query (y/n):')
+        if continue_querying == 'y':
+            self.continue_querying()
+        else:
+            print('You did not select \'y\' so query complete')
 
 
 
@@ -358,6 +373,8 @@ class index:
                     self.shared_dictionary[word] = [relevant_tf_idf_total, non_relevant_tf_idf_total]
 
     def get_relevant_doc_ids(self):
+        self.relevant_docs_list.clear()
+        self.non_relevant_docs_list.clear()
         relevant_docs_string = input('Enter relevant document ids separated by space:')
         non_relevant_docs_string = input('Enter non relevant document ids separated by space:')
         relevant_docs_list = relevant_docs_string.split()
