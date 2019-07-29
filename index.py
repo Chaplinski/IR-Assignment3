@@ -18,6 +18,8 @@ class index:
         self.alpha = 1
         self.beta = 0.75
         self.gamma = 0.15
+        self.shared_dictionary = {}
+        self.new_dictionary = {}
         self.query_string = ''
         self.query_dict = {}
         self.stop_words = []
@@ -220,10 +222,43 @@ class index:
         # Return the new query  terms and their weights
         self.exact_query()
         self.get_relevant_doc_ids()
+        self.calculate_shared_dictionary()
+
+        for term in self.shared_dictionary:
+            # get tf-idf of term if term is in query
+            if term in self.query_tf_idf_dict:
+                query_term_tf_idf = self.query_tf_idf_dict[term]
+            else:
+                query_term_tf_idf = 0
+
+            term_tf_idf_to_be_added = self.shared_dictionary[term][0]
+            term_tf_idf_to_be_subtracted = self.shared_dictionary[term][1]
+            non_rel_doc_list_len = len(self.non_relevant_docs_list)
+            rel_doc_list_len = len(self.relevant_docs_list)
+
+            # this fixes a division by 0 problem
+            if rel_doc_list_len > 0:
+                to_be_added = ((self.beta / rel_doc_list_len) * term_tf_idf_to_be_added)
+            else:
+                to_be_added = 0
+            # this fixes a division by 0 problem
+            if non_rel_doc_list_len > 0:
+                to_be_subtracted = ((self.gamma / non_rel_doc_list_len) * term_tf_idf_to_be_subtracted)
+            else:
+                to_be_subtracted = 0
+
+            new_tf_idf = (self.alpha * query_term_tf_idf) + to_be_added - to_be_subtracted
+
+            self.new_dictionary[term] = new_tf_idf
+
+        print(self.query_tf_idf_dict)
+        print(self.new_dictionary)
+        sys.exit()
 
 
-        # dictionary of words that appear in one or more document flagged as relevant
-        shared_dictionary = {}
+
+
+    def calculate_shared_dictionary(self):
         for doc_id in self.relevant_docs_list:
             document_name = self.doc_ID_list[doc_id]
             with open('collection/' + document_name, "r") as file:
@@ -232,7 +267,6 @@ class index:
             full_document = full_document.translate(str.maketrans('', '', string.punctuation))
             full_document_word_list = full_document.split()
 
-            print('Full doc word list:', full_document_word_list)
             # for every word in a document
             for word in full_document_word_list:
                 word = str.lower(word)
@@ -258,10 +292,7 @@ class index:
                             non_relevant_tf_idf_total += tf_idf
                             # print('document', docs_containing_word[0], 'tf-idf', tf_idf)
 
-                    shared_dictionary[word] = [relevant_tf_idf_total, non_relevant_tf_idf_total]
-
-        print(shared_dictionary)
-        sys.exit()
+                    self.shared_dictionary[word] = [relevant_tf_idf_total, non_relevant_tf_idf_total]
 
     def get_relevant_doc_ids(self):
         relevant_docs_string = input('Enter relevant document ids separated by space:')
