@@ -25,7 +25,7 @@ class index:
         self.stop_words = []
         self.query_tf_idf_dict = {}
         self.index_tf_idf_dict = {}
-        self.top_k = 20
+        self.top_k = 10
         self.doc_lengths = []
         self.query_length = 0
         self.cluster_dict = {}
@@ -102,6 +102,7 @@ class index:
 
     def get_query_tf_idf_dict(self):
         # for each word in the query
+        print('HERE:', self.query_dict)
         for word, list in self.query_dict.items():
             if word not in self.stop_words:
                 # get tf-idf and store it
@@ -224,6 +225,74 @@ class index:
         self.get_relevant_doc_ids()
         start = time.perf_counter()
         self.calculate_shared_dictionary()
+        self.calculate_new_query()
+        end = time.perf_counter()
+        print('New query computed in', (end - start), 'seconds.')
+        print('Original query tf-idf dict', self.query_tf_idf_dict)
+        print('New query:', self.new_dictionary)
+        continue_querying = input('Continue with new query (y/n):')
+        if continue_querying == 'y':
+            self.continue_querying()
+        else:
+            print('You did not select \'y\' so query complete')
+
+    def continue_querying(self):
+        start = time.perf_counter()
+        self.query_dict.clear()
+        self.query_tf_idf_dict.clear()
+        self.index_tf_idf_dict.clear()
+        self.query_terms.clear()
+        self.query_string = ''
+        temp_terms = []
+        for word in self.new_dictionary:
+            self.query_string += word + ' '
+            temp_terms.append(word)
+
+        for word in temp_terms:
+            if word in self.dictionary:
+                self.query_terms.append(word)
+        self.create_query_dict()
+        # everything done in ask_for_query done above this comment
+
+        self.get_tf_idf_dicts()
+
+        denominator_query = self.get_query_denominator()
+        top_k_dictionary = {}
+        # for each text id held in index_tf_idf_dict
+        for index_key, index_dictionary in self.index_tf_idf_dict.items():
+            numerator = 0
+            for word in index_dictionary:
+                index_word_tf_idf = index_dictionary[word]
+                query_word_tf_idf = self.query_tf_idf_dict[word]
+                numerator += query_word_tf_idf * index_word_tf_idf
+
+            denominator_index = self.doc_lengths[index_key]
+            denominator_final = denominator_query * denominator_index
+            cosine_sim = numerator / denominator_final
+            top_k_dictionary[index_key] = cosine_sim
+
+        top_k_dictionary_sorted_keys = sorted(top_k_dictionary, key=top_k_dictionary.get, reverse=True)
+
+        i = self.top_k
+        end = time.perf_counter()
+        print('Query length =', self.query_length)
+        print('Top ', self.top_k, ' results for the query \'', self.query_string, '\' are:', sep='')
+        j = 1
+        for r in top_k_dictionary_sorted_keys:
+            for index, item in enumerate(self.doc_ID_list):
+                if r == index:
+                    print(j, '. ', item, ' with score ', top_k_dictionary[index], sep='')
+                    i -= 1
+                    j += 1
+                    break
+            if i == 0:
+                break
+        print('Results found in', (end-start),'seconds')
+        print('')
+
+
+
+    def calculate_new_query(self):
 
         for term in self.shared_dictionary:
             # get tf-idf of term if term is in query
@@ -251,12 +320,6 @@ class index:
             new_tf_idf = (self.alpha * query_term_tf_idf) + to_be_added - to_be_subtracted
 
             self.new_dictionary[term] = new_tf_idf
-
-        end = time.perf_counter()
-        print('New query computed in', (end-start), 'seconds.')
-        print(self.query_tf_idf_dict)
-        print(self.new_dictionary)
-        sys.exit()
 
     def calculate_shared_dictionary(self):
         for doc_id in self.relevant_docs_list:
@@ -315,6 +378,7 @@ class index:
         self.get_tf_idf_dicts()
 
         denominator_query = self.get_query_denominator()
+        # print('denominator query 1', denominator_query)
 
         top_k_dictionary = {}
         # for each text id held in index_tf_idf_dict
