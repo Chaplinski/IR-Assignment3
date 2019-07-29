@@ -52,7 +52,7 @@ class index:
             lines = open(self.collection + filename).read()
             tokens = re.split('\W+', lines.lower());
             self.insert_terms(tokens, docID)
-        #self.dictionary = collections.OrderedDict(sorted(self.dictionary.items()))
+        self.dictionary = collections.OrderedDict(sorted(self.dictionary.items()))
 
     def insert_terms(self,tokens,docID):
         #add terms to the dict data structure
@@ -221,6 +221,7 @@ class index:
         self.exact_query()
         self.get_relevant_doc_ids()
 
+
         # dictionary of words that appear in one or more document flagged as relevant
         shared_dictionary = {}
         for doc_id in self.relevant_docs_list:
@@ -234,9 +235,9 @@ class index:
             print('Full doc word list:', full_document_word_list)
             # for every word in a document
             for word in full_document_word_list:
+                word = str.lower(word)
                 # if in main index and not a stop word and not already in shared dict
-                if word in self.dictionary:
-                    print('word:', word)
+                if word in self.dictionary.keys():
                     # set the idf
                     word_values = self.dictionary[word]
                     idf = word_values[0]
@@ -258,6 +259,7 @@ class index:
                             # print('document', docs_containing_word[0], 'tf-idf', tf_idf)
 
                     shared_dictionary[word] = [relevant_tf_idf_total, non_relevant_tf_idf_total]
+
         print(shared_dictionary)
         sys.exit()
 
@@ -276,7 +278,6 @@ class index:
         # #Returns at the minimum the document names of the top K documents ordered in decreasing order of similarity score
         self.ask_for_query()
         self.query_helper('exact retrieval')
-
 
     def query_helper(self, retrieval_type):
         start = time.perf_counter()
