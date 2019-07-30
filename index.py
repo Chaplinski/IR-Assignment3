@@ -18,6 +18,7 @@ class index:
         self.alpha = 1
         self.beta = 0.75
         self.gamma = 0.15
+        self.iterations = 1
         self.shared_dictionary = {}
         self.new_dictionary = {}
         self.query_string = ''
@@ -281,31 +282,38 @@ class index:
         i = self.top_k
         end = time.perf_counter()
         # print('Query length =', self.query_length)
-        print('Top ', self.top_k, ' results for the query \'', self.query_string, '\' are:', sep='')
+        print('')
+        print('Top ', self.top_k, ' results for the query are:', sep='')
+        print('')
+        print('Doc id, Doc Name, Score')
         j = 1
         for r in top_k_dictionary_sorted_keys:
             for index, item in enumerate(self.doc_ID_list):
                 if r == index:
-                    print(j, '. ', item, ' with score ', top_k_dictionary[index], sep='')
+                    print(index, ', ', item, ', ', top_k_dictionary[index], sep='')
                     i -= 1
                     j += 1
                     break
             if i == 0:
                 break
+        print('')
         print('Results found in', (end-start),'seconds')
+        print('')
+        print('=== Rocchio Algorithm ===')
         print('')
 
         self.get_relevant_doc_ids()
+        start = time.perf_counter()
         self.calculate_shared_dictionary()
         self.calculate_new_query()
+        end = time.perf_counter()
+        print('New query computed in', (end-start), 'seconds.')
         print('New query terms with weights:', self.new_dictionary)
         continue_querying = input('Continue with new query (y/n):')
         if continue_querying == 'y':
             self.continue_querying()
         else:
             print('You did not select \'y\' so query complete')
-
-
 
     def calculate_new_query(self):
 
@@ -375,14 +383,16 @@ class index:
     def get_relevant_doc_ids(self):
         self.relevant_docs_list.clear()
         self.non_relevant_docs_list.clear()
+        print('Iteration:', self.iterations)
+        self.iterations += 1
         relevant_docs_string = input('Enter relevant document ids separated by space:')
         non_relevant_docs_string = input('Enter non relevant document ids separated by space:')
         relevant_docs_list = relevant_docs_string.split()
         self.relevant_docs_list = list(map(int, relevant_docs_list))
         non_relevant_docs_list = non_relevant_docs_string.split()
         self.non_relevant_docs_list = list(map(int, non_relevant_docs_list))
-        print('Relevant documents:', self.relevant_docs_list)
-        print('Non relevant documents', self.non_relevant_docs_list)
+        # print('Relevant documents:', self.relevant_docs_list)
+        # print('Non relevant documents', self.non_relevant_docs_list)
 
     def exact_query(self):
         # #function for exact top K retrieval (method 1)
@@ -415,19 +425,25 @@ class index:
 
         i = self.top_k
         end = time.perf_counter()
-        print('Query length =', self.query_length)
-        print('Top ', self.top_k, ' results for the query \'', self.query_string, '\' are:', sep='')
+        # print('Query length =', self.query_length)
+        print('')
+        print('Top ', self.top_k, ' results for the query are:', sep='')
+        print('')
+        print('Doc id, Doc Name, Score')
         j = 1
         for r in top_k_dictionary_sorted_keys:
             for index, item in enumerate(self.doc_ID_list):
                 if r == index:
-                    print(j, '. ', item, ' with score ', top_k_dictionary[index], sep='')
+                    print(index, ', ', item, ', ', top_k_dictionary[index], sep='')
                     i -= 1
                     j += 1
                     break
             if i == 0:
                 break
+        print('')
         print('Results found in', end - start, 'seconds')
+        print('')
+        print('=== Rocchio Algorithm ===')
         print('')
 
     def get_query_denominator(self):
