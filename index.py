@@ -33,6 +33,7 @@ class index:
         self.doc_ID_list = []  # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
         # self.get_stop_words()
         # print(self.stop_words)
+        self.build_collection()
         start = time.time()
         self.buildIndex()
         self.total_number_of_documents = len(self.doc_ID_list)
@@ -49,25 +50,6 @@ class index:
         # index should also contain positional information of the terms in the
         # document --- term: [(ID1,[pos1,pos2,..]), (ID2, [pos1,pos2,..]),..]
         # use unique document IDs
-        # open and read file
-        # f = open('time/TIME.ALL', "r")
-        # contents = f.read()
-        # # split file into list of strings that are each document
-        # contents_list = contents.split('*')
-        # # remove empty string from first position and '*stop' from last position
-        # contents_list.pop(0)
-        # contents_list.pop(len(contents_list) - 1)
-        #
-        # for content in contents_list:
-        #     title = content[0:8]
-        #     # print('title:', title)
-        #     content_list = content.split('\n', 1)
-        #     # print(content_list)
-        #     file = open("newcollection/" + title + ".txt", "w")
-        #     file.write(content_list[1])
-        #     file.close()
-        #
-        # sys.exit()
 
         docID = -1
         for filename in os.listdir(self.collection):
@@ -102,6 +84,26 @@ class index:
                 else:   #new docID for this tok
                     item=[(docID,[pos])]
                     self.dictionary[tok]=item
+
+    def build_collection(self):
+        os.mkdir(self.collection)
+        # open and read file
+        f = open('time/TIME.ALL', "r")
+        contents = f.read()
+        # split file into list of strings that are each document
+        contents_list = contents.split('*')
+        # remove empty string from first position and '*stop' from last position
+        contents_list.pop(0)
+        contents_list.pop(len(contents_list) - 1)
+
+        for content in contents_list:
+            title = content[0:8]
+            # print('title:', title)
+            content_list = content.split('\n', 1)
+            # print(content_list)
+            file = open(self.collection + title + ".txt", "w")
+            file.write(content_list[1])
+            file.close()
 
     def query(self, query_terms, k):
         # function for exact top K retrieval using cosine similarity
