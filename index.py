@@ -31,6 +31,8 @@ class index:
         self.query_length = 0
         self.cluster_dict = {}
         self.doc_ID_list = []  # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
+        # self.get_stop_words()
+        # print(self.stop_words)
         start = time.time()
         self.buildIndex()
         self.total_number_of_documents = len(self.doc_ID_list)
@@ -39,7 +41,7 @@ class index:
         end = time.time()
         print("TF-IDF Index built in ", (end - start), " seconds.")
         self.calculate_doc_lengths()
-        # print(self.dictionary)
+        # # print(self.dictionary)
         self.rocchio()
 
     def buildIndex(self):
@@ -47,6 +49,26 @@ class index:
         # index should also contain positional information of the terms in the
         # document --- term: [(ID1,[pos1,pos2,..]), (ID2, [pos1,pos2,..]),..]
         # use unique document IDs
+        # open and read file
+        # f = open('time/TIME.ALL', "r")
+        # contents = f.read()
+        # # split file into list of strings that are each document
+        # contents_list = contents.split('*')
+        # # remove empty string from first position and '*stop' from last position
+        # contents_list.pop(0)
+        # contents_list.pop(len(contents_list) - 1)
+        #
+        # for content in contents_list:
+        #     title = content[0:8]
+        #     # print('title:', title)
+        #     content_list = content.split('\n', 1)
+        #     # print(content_list)
+        #     file = open("newcollection/" + title + ".txt", "w")
+        #     file.write(content_list[1])
+        #     file.close()
+        #
+        # sys.exit()
+
         docID = -1
         for filename in os.listdir(self.collection):
             docID = docID + 1
@@ -347,7 +369,7 @@ class index:
     def calculate_shared_dictionary(self):
         for doc_id in self.relevant_docs_list:
             document_name = self.doc_ID_list[doc_id]
-            with open('collection/' + document_name, "r") as file:
+            with open(self.collection + document_name, "r") as file:
                 full_document = file.read()
 
             full_document = full_document.translate(str.maketrans('', '', string.punctuation))
@@ -478,8 +500,15 @@ class index:
             temp_list.append(root_length)
         self.doc_lengths = temp_list
 
+    def get_stop_words(self):
+        f = open('time/TIME.STP', "r")
+        contents = f.read()
+        contents = self.convert_string_to_list(contents)
+        self.stop_words = contents
+
+
     # === Testing === #
-a=index("collection/")
+a=index("newcollection/")
 # print(a.query_terms)
 # print(a.query_dict)
 # === End of Testing === #
