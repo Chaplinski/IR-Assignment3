@@ -4,6 +4,429 @@
     <list default="true" id="62783363-50f3-4696-ba96-385a45f97bad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/index.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 017.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 018.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 019.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 020.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 021.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 023.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 024.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 025.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 026.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 027.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 028.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 029.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 030.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 031.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 032.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 033.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 034.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 035.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 036.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 040.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 042.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 043.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 045.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 047.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 048.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 049.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 050.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 051.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 052.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 053.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 054.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 055.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 057.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 058.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 059.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 060.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 061.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 062.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 063.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 064.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 065.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 066.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 067.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 068.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 069.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 070.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 071.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 072.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 081.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 082.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 083.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 084.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 085.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 086.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 087.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 088.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 090.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 091.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 092.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 093.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 094.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 095.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 096.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 097.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 098.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 099.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 100.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 101.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 102.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 104.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 105.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 106.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 107.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 108.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 109.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 110.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 111.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 112.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 113.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 115.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 116.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 117.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 118.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 119.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 120.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 121.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 122.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 123.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 126.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 128.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 129.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 130.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 131.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 133.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 134.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 135.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 136.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 137.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 138.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 140.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 143.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 144.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 145.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 146.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 147.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 148.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 149.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 150.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 151.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 152.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 153.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 154.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 155.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 156.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 157.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 158.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 159.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 160.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 161.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 162.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 163.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 170.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 171.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 172.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 173.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 174.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 175.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 176.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 177.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 178.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 179.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 180.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 181.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 182.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 183.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 184.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 185.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 186.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 187.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 188.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 189.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 190.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 191.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 192.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 193.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 194.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 195.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 196.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 197.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 198.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 199.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 200.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 201.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 202.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 203.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 204.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 213.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 214.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 215.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 217.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 218.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 219.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 220.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 221.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 222.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 223.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 224.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 225.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 226.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 227.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 228.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 229.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 230.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 231.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 232.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 234.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 235.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 236.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 237.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 238.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 239.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 240.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 241.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 242.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 243.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 244.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 245.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 246.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 247.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 248.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 249.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 250.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 251.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 252.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 253.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 254.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 255.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 256.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 257.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 258.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 259.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 260.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 261.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 262.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 263.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 264.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 265.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 266.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 267.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 268.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 269.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 270.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 272.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 273.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 274.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 275.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 276.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 277.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 278.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 279.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 280.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 281.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 282.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 283.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 284.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 285.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 286.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 287.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 288.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 289.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 292.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 293.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 294.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 295.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 296.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 297.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 298.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 299.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 300.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 301.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 302.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 303.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 304.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 305.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 306.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 307.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 308.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 309.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 310.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 311.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 312.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 313.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 315.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 317.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 318.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 319.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 320.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 321.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 322.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 323.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 324.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 326.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 329.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 330.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 331.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 332.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 333.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 334.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 335.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 336.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 337.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 341.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 342.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 345.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 346.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 347.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 348.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 350.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 351.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 353.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 354.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 355.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 356.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 357.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 358.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 359.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 361.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 363.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 364.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 365.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 367.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 368.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 369.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 370.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 380.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 381.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 382.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 383.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 384.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 385.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 386.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 388.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 389.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 390.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 391.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 392.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 394.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 396.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 398.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 399.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 400.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 401.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 402.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 403.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 404.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 405.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 406.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 407.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 408.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 411.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 412.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 413.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 414.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 415.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 417.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 418.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 422.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 424.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 425.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 426.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 427.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 430.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 431.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 434.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 436.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 437.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 438.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 442.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 443.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 444.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 445.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 446.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 449.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 459.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 460.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 461.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 462.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 463.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 464.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 470.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 471.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 472.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 473.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 475.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 476.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 477.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 478.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 479.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 480.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 485.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 487.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 490.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 491.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 492.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 493.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 494.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 495.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 496.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 497.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 498.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 501.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 502.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 503.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 504.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 507.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 508.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 509.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 511.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 512.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 513.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 514.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 516.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 518.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 519.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 521.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 522.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 523.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 524.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 525.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 526.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 527.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 528.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 529.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 530.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 533.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 534.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 535.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 536.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 537.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 538.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 539.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 540.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 541.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 542.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 543.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 544.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 545.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 546.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 548.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 549.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 550.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 551.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 552.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 553.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 555.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 556.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 557.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 558.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 559.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 560.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 561.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 562.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/newcollection/TEXT 563.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +439,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="103" column="39" selection-start-line="103" selection-start-column="39" selection-end-line="103" selection-end-column="39" />
+            <state relative-caret-position="228">
+              <caret line="474" column="68" selection-start-line="474" selection-start-column="68" selection-end-line="474" selection-end-column="68" />
               <folding>
                 <element signature="e#14#23#0" expanded="true" />
               </folding>
@@ -48,6 +471,13 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/time/TEXTids.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-357" />
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -59,8 +489,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>denominator_query</find>
-      <find>2:</find>
       <find>self.shared_dictionary</find>
       <find>query len</find>
       <find>chou</find>
@@ -89,6 +517,8 @@
       <find>roose</find>
       <find>chancellor</find>
       <find>doc id,</find>
+      <find>doc name</find>
+      <find>doc nam</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -135,6 +565,11 @@
             <path>
               <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
               <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Assignment3" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Assignment3" type="462c0819:PsiDirectoryNode" />
+              <item name="time" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -252,13 +687,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/collection/Text-292.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/collection/Text-331.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
@@ -549,22 +977,12 @@
         <state relative-caret-position="-77" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/time/TIME.ALL">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="45928" column="17" selection-start-line="45928" selection-start-column="17" selection-end-line="45928" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/time/TIME.QUE">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="85" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/time/TIME.REL">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/newcollection/TEXT 241.txt">
       <provider selected="true" editor-type-id="text-editor">
@@ -578,10 +996,25 @@
         <state relative-caret-position="-31" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/time/TIME.REL">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/time/TIME.ALL">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="45928" column="17" selection-start-line="45928" selection-start-column="17" selection-end-line="45928" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/time/TEXTids.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-357" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="103" column="39" selection-start-line="103" selection-start-column="39" selection-end-line="103" selection-end-column="39" />
+        <state relative-caret-position="228">
+          <caret line="474" column="68" selection-start-line="474" selection-start-column="68" selection-end-line="474" selection-end-column="68" />
           <folding>
             <element signature="e#14#23#0" expanded="true" />
           </folding>

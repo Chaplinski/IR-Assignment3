@@ -12,6 +12,7 @@ class index:
     def __init__(self,path):
         self.collection = path
         self.dictionary = {}
+        self.new_id_dictionary = {}
         self.query_terms = []
         self.relevant_docs_list = []
         self.non_relevant_docs_list = []
@@ -31,9 +32,10 @@ class index:
         self.query_length = 0
         self.cluster_dict = {}
         self.doc_ID_list = []  # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
-        # self.get_stop_words()
+        self.get_stop_words()
         # print(self.stop_words)
         self.build_collection()
+        self.build_id_dict()
         start = time.time()
         self.buildIndex()
         self.total_number_of_documents = len(self.doc_ID_list)
@@ -104,6 +106,18 @@ class index:
             file = open(self.collection + title + ".txt", "w")
             file.write(content_list[1])
             file.close()
+
+    def build_id_dict(self):
+        f = open('time/TEXTids.txt', "r")
+        content = f.read()
+        # split file into list of strings that are each document
+        contents_list = content.split('\n')
+        contents_list.pop(0)
+
+        for element in contents_list:
+            if element != '':
+                element = element.split(',')
+                self.new_id_dictionary[int(element[0])] = element[1][1:]
 
     def query(self, query_terms, k):
         # function for exact top K retrieval using cosine similarity
@@ -314,7 +328,7 @@ class index:
         for r in top_k_dictionary_sorted_keys:
             for index, item in enumerate(self.doc_ID_list):
                 if r == index:
-                    print(index, ', ', item, ', ', top_k_dictionary[index], sep='')
+                    print(index, ', ', self.new_id_dictionary[index], ', ', top_k_dictionary[index], sep='')
                     i -= 1
                     j += 1
                     break
@@ -458,7 +472,7 @@ class index:
         for r in top_k_dictionary_sorted_keys:
             for index, item in enumerate(self.doc_ID_list):
                 if r == index:
-                    print(index, ', ', item, ', ', top_k_dictionary[index], sep='')
+                    print(index, ', ', self.new_id_dictionary[index], ', ', top_k_dictionary[index], sep='')
                     i -= 1
                     j += 1
                     break
