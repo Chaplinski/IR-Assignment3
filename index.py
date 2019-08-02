@@ -27,14 +27,14 @@ class index:
         self.stop_words = []
         self.query_tf_idf_dict = {}
         self.index_tf_idf_dict = {}
-        self.top_k = 10
+        self.top_k = 7
         self.doc_lengths = []
         self.query_length = 0
         self.cluster_dict = {}
         self.doc_ID_list = []  # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
         self.get_stop_words()
         # print(self.stop_words)
-        self.build_collection()
+        # self.build_collection()
         self.build_id_dict()
         start = time.time()
         self.buildIndex()
@@ -328,7 +328,7 @@ class index:
         for r in top_k_dictionary_sorted_keys:
             for index, item in enumerate(self.doc_ID_list):
                 if r == index:
-                    print(index, ', ', self.new_id_dictionary[index], ', ', top_k_dictionary[index], sep='')
+                    print(index + 1, ', ', self.new_id_dictionary[index + 1], ', ', top_k_dictionary[index], sep='')
                     i -= 1
                     j += 1
                     break
@@ -383,6 +383,16 @@ class index:
             self.new_dictionary[term] = new_tf_idf
 
     def calculate_shared_dictionary(self):
+        k = 0
+        for doc in self.relevant_docs_list:
+            self.relevant_docs_list[k] = doc - 1
+            k += 1
+
+        k = 0
+        for doc in self.non_relevant_docs_list:
+            self.non_relevant_docs_list[k] = doc - 1
+            k += 1
+
         for doc_id in self.relevant_docs_list:
             document_name = self.doc_ID_list[doc_id]
             with open(self.collection + document_name, "r") as file:
@@ -472,7 +482,7 @@ class index:
         for r in top_k_dictionary_sorted_keys:
             for index, item in enumerate(self.doc_ID_list):
                 if r == index:
-                    print(index, ', ', self.new_id_dictionary[index], ', ', top_k_dictionary[index], sep='')
+                    print(index + 1, ', ', self.new_id_dictionary[index + 1], ', ', top_k_dictionary[index], sep='')
                     i -= 1
                     j += 1
                     break
@@ -496,6 +506,7 @@ class index:
         # initialize every doc length at 0
         for document in self.doc_ID_list:
             self.doc_lengths.append(0)
+        self.doc_lengths.append(0)
 
         # for each word
         for word, list in self.dictionary.items():
