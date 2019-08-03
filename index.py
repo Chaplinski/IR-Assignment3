@@ -5,7 +5,6 @@ import collections
 import time
 import math
 import string
-import sys
 #import other modules as needed
 
 class index:
@@ -27,14 +26,13 @@ class index:
         self.stop_words = []
         self.query_tf_idf_dict = {}
         self.index_tf_idf_dict = {}
-        self.top_k = 7
+        self.top_k = 12
         self.doc_lengths = []
         self.query_length = 0
         self.cluster_dict = {}
         self.doc_ID_list = []  # list to map docIDs to Filenames, docIDs rn=ange from 0 to n-1 where n is the number of documents.
         self.get_stop_words()
-        # print(self.stop_words)
-        # self.build_collection()
+        self.build_collection()
         self.build_id_dict()
         start = time.time()
         self.buildIndex()
@@ -44,7 +42,6 @@ class index:
         end = time.time()
         print("TF-IDF Index built in ", (end - start), " seconds.")
         self.calculate_doc_lengths()
-        # # print(self.dictionary)
         self.rocchio()
 
     def buildIndex(self):
@@ -100,9 +97,7 @@ class index:
 
         for content in contents_list:
             title = content[0:8]
-            # print('title:', title)
             content_list = content.split('\n', 1)
-            # print(content_list)
             file = open(self.collection + title + ".txt", "w")
             file.write(content_list[1])
             file.close()
@@ -141,7 +136,6 @@ class index:
 
     def get_query_tf_idf_dict(self):
         # for each word in the query
-        # print('HERE:', self.query_dict)
         for word, list in self.query_dict.items():
             if word not in self.stop_words:
                 # get tf-idf and store it
@@ -153,7 +147,6 @@ class index:
         for key in self.query_tf_idf_dict:
             # get idf
             idf = self.dictionary[key][0]
-            # print('idf:', idf)
             for item in self.dictionary[key]:
                 # get every item
                 if item != self.dictionary[key][0]:
@@ -198,6 +191,7 @@ class index:
         self.index_tf_idf_dict.clear()
         self.query_terms.clear()
         self.query_string = input("Enter your query: ")
+        print('Number of (top) results:', self.top_k)
         temp_terms = self.convert_string_to_list(self.query_string)
         for word in temp_terms:
             if word in self.dictionary:
@@ -267,7 +261,6 @@ class index:
         self.calculate_new_query()
         end = time.perf_counter()
         print('New query computed in', (end - start), 'seconds.')
-        # print('Original query tf-idf dict', self.query_tf_idf_dict)
         print('New query terms with weights:', self.new_dictionary)
         continue_querying = input('Continue with new query (y/n):')
         if continue_querying == 'y':
@@ -297,10 +290,6 @@ class index:
 
         denominator_query = self.get_query_denominator()
 
-        # print('query terms 2nd iteration:', self.query_terms)
-        # print('shared documents', self.shared_dictionary)
-        # sys.exit()
-
         top_k_dictionary = {}
         # for each text id held in index_tf_idf_dict
         for index_key, index_dictionary in self.index_tf_idf_dict.items():
@@ -319,7 +308,6 @@ class index:
 
         i = self.top_k
         end = time.perf_counter()
-        # print('Query length =', self.query_length)
         print('')
         print('Top ', self.top_k, ' results for the query are:', sep='')
         print('')
@@ -419,12 +407,10 @@ class index:
 
                             tf_idf = docs_containing_word[1] * idf
                             relevant_tf_idf_total += tf_idf
-                            # print('document', docs_containing_word[0], 'tf-idf', tf_idf)
 
                         elif docs_containing_word != word_values[0] and docs_containing_word[0] in self.non_relevant_docs_list:
                             tf_idf = docs_containing_word[1] * idf
                             non_relevant_tf_idf_total += tf_idf
-                            # print('document', docs_containing_word[0], 'tf-idf', tf_idf)
 
                     self.shared_dictionary[word] = [relevant_tf_idf_total, non_relevant_tf_idf_total]
 
@@ -439,8 +425,6 @@ class index:
         self.relevant_docs_list = list(map(int, relevant_docs_list))
         non_relevant_docs_list = non_relevant_docs_string.split()
         self.non_relevant_docs_list = list(map(int, non_relevant_docs_list))
-        # print('Relevant documents:', self.relevant_docs_list)
-        # print('Non relevant documents', self.non_relevant_docs_list)
 
     def exact_query(self):
         # #function for exact top K retrieval (method 1)
@@ -453,7 +437,6 @@ class index:
         self.get_tf_idf_dicts()
 
         denominator_query = self.get_query_denominator()
-        # print('denominator query 1', denominator_query)
 
         top_k_dictionary = {}
         # for each text id held in index_tf_idf_dict
@@ -473,7 +456,6 @@ class index:
 
         i = self.top_k
         end = time.perf_counter()
-        # print('Query length =', self.query_length)
         print('')
         print('Top ', self.top_k, ' results for the query are:', sep='')
         print('')
@@ -536,6 +518,4 @@ class index:
 
     # === Testing === #
 a=index("newcollection/")
-# print(a.query_terms)
-# print(a.query_dict)
 # === End of Testing === #
